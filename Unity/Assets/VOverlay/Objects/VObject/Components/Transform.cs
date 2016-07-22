@@ -16,9 +16,11 @@ namespace VTree.BiomeDefenseN.ObjectsN.ObjectN.ComponentsN {
 		[VDFPreDeserialize] public VTransform() {}
 
 		[P(false)] GameObject gameObject;
+		[P(false)] public Transform transform;
 		public void PostObjGameObjectSet() {
 			//this.obj = obj; // must set obj here as well, for case where obj is not part of main VTree (i.e. where _PostAdd() above is not called)
 			gameObject = obj.gameObject;
+			transform = gameObject.transform;
 		}
 
 		[NotTo("js")] VVector3 position = VVector3.zero; // don't reference directly // maybe make-so: this is a VVector2
@@ -34,9 +36,9 @@ namespace VTree.BiomeDefenseN.ObjectsN.ObjectN.ComponentsN {
 				//if (attachPoint == null)
 				if (gameObject == null)
 					return;
-				gameObject.transform.position = Position.ToVector3();
+				transform.position = Position.ToVector3();
 				PostTransformChange();
-				//gameObject.transform.position = (Position - (GetBounds().size / 2).NewZ(0)).ToVector3();
+				//transform.position = (Position - (GetBounds().size / 2).NewZ(0)).ToVector3();
 			}
 		}
 		//public VVector2 Pos2D { get { return position.ToVVector2(); } }
@@ -50,9 +52,9 @@ namespace VTree.BiomeDefenseN.ObjectsN.ObjectN.ComponentsN {
 				rotation = value;
 				if (gameObject == null)
 					return;
-				if (gameObject.transform.GetMeta("rotation_original") == null)
-					gameObject.transform.SetMeta("rotation_original", gameObject.transform.localRotation);
-				gameObject.transform.localRotation = gameObject.transform.GetMeta<Quaternion>("rotation_original") * Rotation.ToQuaternion();
+				if (transform.GetMeta("rotation_original") == null)
+					transform.SetMeta("rotation_original", transform.localRotation);
+				transform.localRotation = transform.GetMeta<Quaternion>("rotation_original") * Rotation.ToQuaternion();
 				PostTransformChange();
 			}
 		}
@@ -66,23 +68,23 @@ namespace VTree.BiomeDefenseN.ObjectsN.ObjectN.ComponentsN {
 				scale = value;
 				if (gameObject == null)
 					return;
-				//_gameObject.transform.localScale = Scale.ToVector3();
-				//var baseScale = obj.type.gameObject.transform.localScale.ToVVector3();
+				//_transform.localScale = Scale.ToVector3();
+				//var baseScale = obj.type.transform.localScale.ToVVector3();
 				var baseScale = 1;
-				gameObject.transform.localScale = (baseScale * Scale).ToVector3();
+				transform.localScale = (baseScale * Scale).ToVector3();
 				PostTransformChange();
 			}
 		}
 
 		// called by VObject.Manifest(), for initial values
 		public void ApplyTransform() {
-			gameObject.transform.position = Position.ToVector3();
-			if (gameObject.transform.GetMeta("rotation_original") == null)
-				gameObject.transform.SetMeta("rotation_original", gameObject.transform.localRotation);
-			gameObject.transform.localRotation = gameObject.transform.GetMeta<Quaternion>("rotation_original") * Rotation.ToQuaternion();
-			//var baseScale = obj.type.gameObject.transform.localScale.ToVVector3();
+			transform.position = Position.ToVector3();
+			if (transform.GetMeta("rotation_original") == null)
+				transform.SetMeta("rotation_original", transform.localRotation);
+			transform.localRotation = transform.GetMeta<Quaternion>("rotation_original") * Rotation.ToQuaternion();
+			//var baseScale = obj.type.transform.localScale.ToVVector3();
 			var baseScale = 1;
-			gameObject.transform.localScale = (baseScale * Scale).ToVector3();
+			transform.localScale = (baseScale * Scale).ToVector3();
 		}
 
 		public bool IsRotationDiagonal(VVector4? rotationOverride = null) {
@@ -95,6 +97,8 @@ namespace VTree.BiomeDefenseN.ObjectsN.ObjectN.ComponentsN {
 		}
 
 		void PostTransformChange() {}
+
+		public void PreViewFrameTick() { Position = obj.gameObject.transform.position.ToVVector3(); }
 		public void PostDataFrameTick() {}
 	}
 }

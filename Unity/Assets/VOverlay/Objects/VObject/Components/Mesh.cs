@@ -33,7 +33,8 @@ namespace VTree.BiomeDefenseN.ObjectsN.ObjectN.ComponentsN {
 
 			// add raw-image for emoji-char
 			emojiCharDrawer = new VTextureDrawer();
-			emojiCharDrawer.rect = new VRect(0, 0, 36, 36);
+			emojiCharDrawer.transform.pivot = new Vector2(.5f, .5f);
+			emojiCharDrawer.rect = new VRect(0, 0, 1 * VO.pixelsPerMeter, 1 * VO.pixelsPerMeter);
 			emojiCharDrawer.material = VO.main.emojiAdderScript.emojiFont_material;
 			emojiCharDrawer.texture = VO.main.emojiAdderScript.emojiFont_atlas.texture;
 			emojiCharDrawer.imageComp_raw.uvRect = EmojiAdder.GetUVRectForEmojiChar(obj.emojiStr); // emoji-str must be only one emoji-char, atm
@@ -45,9 +46,14 @@ namespace VTree.BiomeDefenseN.ObjectsN.ObjectN.ComponentsN {
 		}
 
 		public void PreViewFrameTick() {
-			VVector2 posOnScreen = Camera.main.WorldToScreenPoint(obj.transform.Position);
+			/*VVector2 posOnScreen = Camera.main.WorldToScreenPoint(obj.transform.Position);
 			//emojiCharDrawer.rect = new VRect(posOnScreen.x - 1, posOnScreen.y - 1, 2, 2);
-			emojiCharDrawer.rect = emojiCharDrawer.rect.NewPosition(posOnScreen);
+			emojiCharDrawer.rect = emojiCharDrawer.rect.NewPosition(posOnScreen);*/
+			/*var posOnCanvas = RectTransformUtility.WorldToScreenPoint(Camera.main, obj.transform.Position.ToVVector2().ToVector2(false));
+			emojiCharDrawer.rect = emojiCharDrawer.rect.NewPosition(posOnCanvas.ToVVector2(false));*/
+			//emojiCharDrawer.transform.transform.position = (obj.transform.Position * VO.pixelsPerMeter).ToVector3();
+			emojiCharDrawer.transform.transform.position = obj.transform.Position.ToVector3();
+			emojiCharDrawer.transform.rotation = obj.transform.transform.rotation;
 		}
 		public void PostDataFrameTick() {}
 	}

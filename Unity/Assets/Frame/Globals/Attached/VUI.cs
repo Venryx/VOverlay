@@ -18,8 +18,7 @@ public class VTextureDrawer {
 		if (canvasObjOverride)
 			obj.transform.parent = canvasObjOverride.transform;
 		else
-			//obj.transform.parent = VO.main.gameObject.GetChild(useL2Camera ? "#General/UnityUICamera_L2/Canvas" : "#General/UnityUICamera_L1/Canvas").transform;
-			obj.transform.parent = VO.main.gameObject.GetChild("@General/UnityUICamera_L1/Canvas").transform;
+			obj.transform.parent = VO.main.gameObject.GetChild(useL2Camera ? "@General/UI/Canvas_L2" : "@General/UI/Canvas_L1").transform;
 		obj.SetActive(false);
 		obj.SetLayer("UI");
 		//obj.transform.localPosition = new Vector3(rect.x - (Screen.width / 2), rect.y - (Screen.height / 2), 1);
@@ -115,6 +114,22 @@ public class VTextureDrawer {
 			transform.sizeDelta = _rect.size.ToVector2(false);
 		}
 	}
+	/*static Vector2 canvasWorldPos = new Vector2();
+	public VRect globalRect {
+		get { return _rect.NewPosition(_rect.position + ); }
+		set {
+			_rect = value;
+			/*transform.anchorMin = new Vector2((float)(_rect.x / Screen.width), (float)(_rect.y / Screen.height));
+			transform.anchorMax = new Vector2((float)((_rect.x + _rect.width - 1) / Screen.width), (float)((_rect.y + _rect.height - 1) / Screen.height));*/
+			/*transform.anchoredPosition = new Vector2((float)_rect.x, (float)_rect.y);
+			transform.sizeDelta = new Vector2((float)rect.width - Screen.width, (float)rect.height - Screen.height);*#/
+
+			/*transform.pivot = Vector2.one / 2;
+			transform.anchorMin = transform.anchorMax = Vector2.zero;*#/
+			transform.anchoredPosition = _rect.position.ToVector2(false);
+			transform.sizeDelta = _rect.size.ToVector2(false);
+		}
+	}*/
 
 	public GameObject obj;
 	public RectTransform transform;

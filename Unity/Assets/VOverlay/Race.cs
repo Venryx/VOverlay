@@ -86,7 +86,7 @@ namespace VTree.VOverlayN {
 				var unit = jumperUnitType.Clone();
 				unit.map = map;
 				unit.owner = player;
-				unit.transform.Position = new VVector3(0, 0, 1);
+				unit.transform.Position = new VVector3(0, 0, 0); // only x and z are used for 2d
 				unit.emojiStr = player.chatMember.emojiStr;
 				match.map.a(a=>a.units).add = unit;
 			}
@@ -95,6 +95,14 @@ namespace VTree.VOverlayN {
 		void StartMatch(Match match) { match.a(a=>a.started).set = true; }
 
 		[P(false)] public Match liveMatch;
-		void liveMatch_PostSet() { liveMatch.StartBuilding(); }
+		[IgnoreStartData] void liveMatch_PreSet() {
+			if (liveMatch != null) // if live-match is being closed
+				V.Destroy(liveMatch.obj);
+		}
+		void liveMatch_PostSet() {
+			if (liveMatch == null)
+				return;
+			liveMatch.StartBuilding();
+		}
 	}
 }

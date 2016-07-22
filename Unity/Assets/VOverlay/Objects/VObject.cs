@@ -127,16 +127,21 @@ namespace VTree.BiomeDefenseN.ObjectsN {
 			if (map != null && map.match != null)
 				if (type.objType == ObjectType.Structure || type.objType == ObjectType.Plant) {
 					var collider = gameObject.AddComponent<BoxCollider2D>();
-					collider.size = Vector3.one;
-					collider.isTrigger = true;
+					collider.size = Vector3.one; // make-so: this is based on obj 'size' prop
 					colliders.Add(collider);
 				}
 				else if (type.objType == ObjectType.Unit) {
 					var collider = gameObject.AddComponent<CircleCollider2D>();
-					collider.radius = 1f;
-					collider.isTrigger = true;
+					//collider.offset = new Vector2(.25f, .25f);
+					collider.radius = .5f;
 					colliders.Add(collider);
 				}
+
+			S._____("add rigidbody");
+			if (map != null && map.match != null) {
+				var rigidbody = gameObject.AddComponent<Rigidbody2D>();
+				rigidbody.mass = 1;
+			}
 
 			_hasBeenManifested = true;
 
@@ -161,8 +166,10 @@ namespace VTree.BiomeDefenseN.ObjectsN {
 		public void PreViewFrameTick(int frame) { // uses simple method, to be consistent with PostDataFrameTick method's call-approach
 			if (map == null || map.match == null || !map._initialBuildCompleted)
 				return;
-			
+
 			//S._____("ripple call to components");
+			if (transform != null)
+				transform.PreViewFrameTick();
 			if (mesh != null)
 				mesh.PreViewFrameTick();
 			//if (isProjectile != null)

@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{76BA16B1-956F-2304-DD39-7DDECB59CAAA}</ProjectGuid>
+    <ProjectGuid>{1AA60596-6964-87F6-2427-6CA85BBAF27D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AssemblyName>Assembly-CSharp-firstpass</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -58,12 +58,6 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
@@ -78,6 +72,7 @@
     <None Include="Assets\Frame\UI\EmojiText\EmojiInfo\EmojiInfo.txt" />
     <None Include="Assets\VOverlay\Objects\Effects\MagicArsenal\KunaiEditor\Editor\Readme.txt" />
     <None Include="Assets\VOverlay\Objects\Effects\MagicArsenal\MagicArsenal - ReadMe.txt" />
+    <None Include="Assets\VOverlay\Objects\Effects\MagicArsenal@GET_FROM_ASSET_STORE.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

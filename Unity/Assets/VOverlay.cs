@@ -18,6 +18,11 @@ namespace VTree {
 		// exception to VO children being only aliases for VOverlay children
 		public static VOverlay main;
 		public static void SubmitChange(Change change, ContextGroup? group = null) { VOverlay.SubmitChange(change, group); }
+
+		// project constants
+		public const double pixelsPerMeter = 30;
+		public static VVector3 GetSize_WorldPixels() { return new VVector3(1920, 0, 1080); }
+		public static VVector3 GetSize_WorldMeter() { return GetSize_WorldPixels() / pixelsPerMeter; }
 	}
 
 	[VDFType(popOutL1: true)] public class VOverlay : Node {
@@ -37,7 +42,7 @@ namespace VTree {
 
 			transformHelper = gameObject.GetChild("@General/@TransformHelper").transform;
 			emojiAdderScript = gameObject.GetChild("@General/EmojiAdder").GetComponent<EmojiAdderScript>();
-			chatInputBox = gameObject.GetChild("@General/UnityUICamera_L1/Canvas/ChatInputBox").GetComponent<InputField>();
+			chatInputBox = gameObject.GetChild("@General/UI/Canvas_L2/ChatInputBox").GetComponent<InputField>();
 		}
 
 		// maybe make-so: for props with NotToUI tag, default group is Local_CS (and therefore doesn't cause error)

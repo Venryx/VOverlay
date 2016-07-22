@@ -449,6 +449,8 @@ using VectorStructExtensions;
 
 	// export
 	public VVector2 ToVVector2() { return new VVector2(x, y); }
+	// make-so: the other ones like this are added
+	public Vector2 ToVector2(bool fromYForwardToUp = true) { return ToVector3(fromYForwardToUp).ToVector2(); }
 	public Vector3i ToVector3i() { return new Vector3i(x, y, z); }
 	public Vector3 ToVector3(bool fromYForwardToUp = true)
 	{

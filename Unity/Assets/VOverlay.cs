@@ -23,6 +23,8 @@ namespace VTree {
 		public const double pixelsPerMeter = 30;
 		public static VVector3 GetSize_WorldPixels() { return new VVector3(1920, 0, 1080); }
 		public static VVector3 GetSize_WorldMeter() { return GetSize_WorldPixels() / pixelsPerMeter; }
+
+		public const float unitSize = 3;
 	}
 
 	[VDFType(popOutL1: true)] public class VOverlay : Node {
@@ -60,8 +62,8 @@ namespace VTree {
 			change.PreApply();
 			// if change originated in this context, and ui is part of target
 			//if (change.obj.IsConnectedToMainTree() && change.sourceContext == "cs_" + Environment.UserName && (group == ContextGroup.Local_CSAndUI || group == ContextGroup.Local_UI))
-			if (change.obj.IsChangeOrMessageSubmissionToUIAllowed() && change.sourceContext == "cs_" + Environment.UserName && (group == ContextGroup.Local_CSAndUI || group == ContextGroup.Local_UI))
-				JSBridge.CallJS("BD.SubmitChange", change, ContextGroup.Local_UI); // send change submission to UI v-tree
+			/*if (change.obj.IsChangeOrMessageSubmissionToUIAllowed() && change.sourceContext == "cs_" + Environment.UserName && (group == ContextGroup.Local_CSAndUI || group == ContextGroup.Local_UI))
+				JSBridge.CallJS("BD.SubmitChange", change, ContextGroup.Local_UI); // send change submission to UI v-tree*/
 			if (group == ContextGroup.Local_CSAndUI || group == ContextGroup.Local_CS)
 				change.Apply();
 		}
@@ -321,7 +323,7 @@ namespace VTree {
 				else {
 					var message = GameObject.Find("ChatInputBox").GetComponent<InputField>().text;
 					GameObject.Find("ChatInputBox").GetComponent<InputField>().text = "";
-					JSBridge.OnMessageAdded(message);
+					VBotBridge.OnLocalChatMessageAdded(message);
 					chatInputBox.gameObject.SetActive(false);
 				}
 			}

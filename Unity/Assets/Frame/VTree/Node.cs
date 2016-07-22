@@ -443,8 +443,8 @@ namespace VTree_Structures {
 
 		public void BroadcastMessage(ContextGroup group, string methodName, params object[] args) {
 			//if (IsConnectedToMainTree() && (group == ContextGroup.Local_CSAndUI || group == ContextGroup.Local_UI)) //targetContext == "all" || targetContext == "ui")
-			if (IsChangeOrMessageSubmissionToUIAllowed() && (group == ContextGroup.Local_CSAndUI || group == ContextGroup.Local_UI))
-				JSBridge.CallJS("BD.Node_BroadcastMessage", new object[] {GetPath_Absolute(), ContextGroup.Local_UI, methodName}.Concat(args).ToArray());
+			/*if (IsChangeOrMessageSubmissionToUIAllowed() && (group == ContextGroup.Local_CSAndUI || group == ContextGroup.Local_UI))
+				JSBridge.CallJS("BD.Node_BroadcastMessage", new object[] {GetPath_Absolute(), ContextGroup.Local_UI, methodName}.Concat(args).ToArray());*/
 			if (group == ContextGroup.Local_CSAndUI || group == ContextGroup.Local_CS) {
 				SendMessage(ContextGroup.Local_CS, methodName, args);
 				foreach (var pair in _children.Pairs())
@@ -456,8 +456,8 @@ namespace VTree_Structures {
 		public object SendMessage(ContextGroup group, string methodName, params object[] args) {
 			object result = null;
 			//if (IsConnectedToMainTree() && (group == ContextGroup.Local_CSAndUI || group == ContextGroup.Local_UI)) //targetContext == "all" || targetContext == "ui")
-			if (IsChangeOrMessageSubmissionToUIAllowed() && (group == ContextGroup.Local_CSAndUI || group == ContextGroup.Local_UI))
-				JSBridge.CallJS("BD.Node_SendMessage", new object[] {GetPath_Absolute(), ContextGroup.Local_UI, methodName}.Concat(args).ToArray());
+			/*if (IsChangeOrMessageSubmissionToUIAllowed() && (group == ContextGroup.Local_CSAndUI || group == ContextGroup.Local_UI))
+				JSBridge.CallJS("BD.Node_SendMessage", new object[] {GetPath_Absolute(), ContextGroup.Local_UI, methodName}.Concat(args).ToArray());*/
 			if (group == ContextGroup.Local_CSAndUI || group == ContextGroup.Local_CS)
 				result = CallMethod(methodName, args);
 			return result;

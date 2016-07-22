@@ -70,6 +70,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Frame\UI\EmojiText\EmojiInfo\EmojiInfo.txt" />
+    <None Include="Assets\SocketIO\JSONObject\readme.txt" />
+    <None Include="Assets\SocketIO\readme.txt" />
     <None Include="Assets\VOverlay\Objects\Effects\MagicArsenal\KunaiEditor\Editor\Readme.txt" />
     <None Include="Assets\VOverlay\Objects\Effects\MagicArsenal\MagicArsenal - ReadMe.txt" />
     <None Include="Assets\VOverlay\Objects\Effects\MagicArsenal@GET_FROM_ASSET_STORE.txt" />

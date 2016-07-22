@@ -51,12 +51,11 @@ namespace VTree.VOverlayN {
 			map.match = match;
 
 			S._____("player init");
-			// make-so: this gets populated with the actual chat-members
-			var members = new List<ChatMember> {new ChatMember("Venryx", VColor.Blue, "😒") };
+			/*var members = new List<ChatMember> {new ChatMember("Venryx", VColor.Blue, "😒") };
 			foreach (var member in members) {
 				var player = new Player(member);
 				map.players.Add(player);
-			}
+			}*/
 
 			// activate
 			// ==========
@@ -70,8 +69,8 @@ namespace VTree.VOverlayN {
 
 			s.a(a=>a.liveMatch).set = match;
 
-			S._____("add standard objects");
-			AddStandardObjects(match);
+			/*S._____("add standard objects");
+			AddStandardObjects(match);*/
 			S._____("notify post-core-map-init");
 			// at this point, core-map-init is officially done; notify post-core-map-init
 			match.NotifyPostCoreMapInit();
@@ -79,7 +78,7 @@ namespace VTree.VOverlayN {
 			S._____(null);
 		}
 
-		void AddStandardObjects(Match match) {
+		/*void AddStandardObjects(Match match) {
 			var map = match.map;
 			var jumperUnitType = VO.main.objects.objects.First(a=>a.name == "Jumper");
 			foreach (var player in match.map.players) {
@@ -90,7 +89,7 @@ namespace VTree.VOverlayN {
 				unit.emojiStr = player.chatMember.emojiStr;
 				match.map.a(a=>a.units).add = unit;
 			}
-		}
+		}*/
 
 		void StartMatch(Match match) { match.a(a=>a.started).set = true; }
 

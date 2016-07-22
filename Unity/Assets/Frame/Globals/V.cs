@@ -701,22 +701,6 @@ public static class V {
 		return result;
 	}
 
-	public static void ShowMessageBox(string title, string message) { JSBridge.CallJS("V.ShowMessageBox_Simple", title, message); }
-
-	public static double GetGraphYValueAtX(Dictionary<double, double> graphPoints_xy, double x) { return GetGraphYValueAtX(graphPoints_xy, x, graphPoints_xy.Keys.OrderBy(a => a).ToList()); }
-	public static double GetGraphYValueAtX(Dictionary<double, double> graphPoints_xy, double x, List<double> graphPoints_xy_keys_sorted) {
-		double result = 0;
-		for (var i = 0; i < graphPoints_xy_keys_sorted.Count; i++)
-			if (i == graphPoints_xy_keys_sorted.Count - 1 || graphPoints_xy_keys_sorted[i + 1] > x) { // if we're at last point, or next point's x is above given x
-				var costA = graphPoints_xy[graphPoints_xy_keys_sorted[i]];
-				var costB = i + 1 < graphPoints_xy_keys_sorted.Count ? graphPoints_xy[graphPoints_xy_keys_sorted[i + 1]] : costA;
-				var percentFromAToB = Mathf.Clamp((float)(costA == costB ? 0 : (x - costA) / (costB - costA)), 0, 1);
-				result = costA + ((costB - costA) * percentFromAToB);
-				break;
-			}
-		return result;
-	}
-
 	// note: this may well be broken; oh well, leave it for testing phase
 	public static Expression<Func<TObj, TResult_New>> ChangeReturnTypeTo<TObj, TResult_Old, TResult_New>(
 		this Expression<Func<TObj, TResult_Old>> expression, TResult_New newReturnType_stub

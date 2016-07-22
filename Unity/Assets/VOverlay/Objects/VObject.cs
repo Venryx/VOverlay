@@ -133,13 +133,14 @@ namespace VTree.BiomeDefenseN.ObjectsN {
 				else if (type.objType == ObjectType.Unit) {
 					var collider = gameObject.AddComponent<CircleCollider2D>();
 					//collider.offset = new Vector2(.25f, .25f);
-					collider.radius = .5f;
+					collider.radius = VO.unitSize / 2;
 					colliders.Add(collider);
 				}
 
 			S._____("add rigidbody");
 			if (map != null && map.match != null) {
 				var rigidbody = gameObject.AddComponent<Rigidbody2D>();
+				rigidbody.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
 				rigidbody.mass = 1;
 			}
 

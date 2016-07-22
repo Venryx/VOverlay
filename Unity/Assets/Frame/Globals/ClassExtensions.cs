@@ -338,6 +338,14 @@ public static class ClassExtensions {
 		return null;
 	}*/
 
+	// Dictionary<TKey, Rect> // (custom extension required, instead of generic version above, because of compiler error)
+	public static Rect? GetValueOrX<TKey>(this Dictionary<TKey, Rect> obj, TKey key, Rect? defaultValueX = default(Rect?)) {
+		Rect result;
+		if (obj.TryGetValue(key, out result))
+			return result;
+		return null;
+	}
+
 	// Dictionary<TKey, [TValue of struct]?> (e.g. Dictionary<string, bool?>)
 	public static TValue? GetValueOrX<TKey, TValue>(this Dictionary<TKey, TValue?> obj, TKey key, TValue? defaultValueX = default(TValue?)) where TValue : struct {
 		TValue? result;

@@ -23,17 +23,24 @@ public class VTypeInfo {
 	static VTypeInfo BuildTypeInfo(Type type) {
 		var result = new VTypeInfo();
 		result.tags = type.GetCustomAttributes(true).OfType<Attribute>().ToList();
-		foreach (FieldInfo field in type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
+
+		//var flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
+		var flags_instance = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
+		var flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static;
+
+		foreach (var field in type.GetFields(flags_instance))
 			if (!field.Name.StartsWith("<")) // anonymous types will have some extra field names starting with '<'
-				result.props[field.Name] = VPropInfo.Get(field);
-		foreach (PropertyInfo property in type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
+					result.props[field.Name] = VPropInfo.Get(field);
+		foreach (var property in type.GetProperties(flags_instance))
 			result.props[property.Name] = VPropInfo.Get(property);
-		foreach (MethodBase method in type.GetMembers(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).Where(member=>member is MethodBase)) { // include constructors
+
+		foreach (var method in type.GetMembers(flags).OfType<MethodBase>()) { // include constructors
 			var finalMethodName = method.Name; // maybe todo: add numbering system for if a method name is shared (e.g. one in base class, and one in derived)
 			while (result.methods.ContainsKey(finalMethodName))
 				finalMethodName += "_2";
 			result.methods.Add(finalMethodName, VMethodInfo.Get(method));
 		}
+
 		return result;
 	}
 

@@ -34,10 +34,10 @@ namespace VTree.BiomeDefenseN.ObjectsN.ObjectN.ComponentsN {
 			// add raw-image for emoji-char
 			emojiCharDrawer = new VTextureDrawer();
 			emojiCharDrawer.transform.pivot = new Vector2(.5f, .5f);
-			emojiCharDrawer.rect = new VRect(0, 0, 1 * VO.pixelsPerMeter, 1 * VO.pixelsPerMeter);
+			emojiCharDrawer.rect = new VRect(0, 0, VO.unitSize * VO.pixelsPerMeter, VO.unitSize * VO.pixelsPerMeter);
 			emojiCharDrawer.material = VO.main.emojiAdderScript.emojiFont_material;
 			emojiCharDrawer.texture = VO.main.emojiAdderScript.emojiFont_atlas.texture;
-			emojiCharDrawer.imageComp_raw.uvRect = EmojiAdder.GetUVRectForEmojiChar(obj.emojiStr); // emoji-str must be only one emoji-char, atm
+			emojiCharDrawer.imageComp_raw.uvRect = EmojiAdder.GetUVRectForEmojiChar(obj.emojiStr).Value; // emoji-str must be only one emoji-char, atm
 			emojiCharDrawer.enabled = true;
 		}
 		public void Unmanifest() {

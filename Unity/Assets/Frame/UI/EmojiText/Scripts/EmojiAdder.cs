@@ -48,7 +48,7 @@ public static class EmojiAdder {
 			converted[j] = char.ConvertFromUtf32(Convert.ToInt32(converted[j], 16));
 		return string.Join(string.Empty, converted);
 	}
-	public static Rect GetUVRectForEmojiChar(string emojiChar) { return emojiRects[emojiChar]; }
+	public static Rect? GetUVRectForEmojiChar(string emojiChar) { return emojiRects.GetValueOrX(emojiChar, null); }
 
 	static char emSpaceChar = '\u2001';
 	public static void AddEmojiToText(Text textComp) {
@@ -109,7 +109,7 @@ public static class EmojiAdder {
 
 				RawImage ri = newRawImage.GetComponent<RawImage>();
 				//ri.uvRect = emojiRects[emojiReplacements[j].emojiStr];
-				ri.uvRect = GetUVRectForEmojiChar(emojiReplacements[j].emojiStr);
+				ri.uvRect = GetUVRectForEmojiChar(emojiReplacements[j].emojiStr).Value;
 			}
 		});
 	}

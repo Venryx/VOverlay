@@ -16,21 +16,23 @@ namespace VTree.BiomeDefenseN.MapsN.MapN {
 			_obj.transform.parent = _map.obj.transform;
 			_obj.layer = LayerMask.NameToLayer("Terrain");
 
+			var borderThickness = 1000f;
+
 			var bottomCollider = _obj.AddComponent<BoxCollider2D>();
-			bottomCollider.size = new Vector2((float)VO.GetSize_WorldMeter().x, 1);
-			bottomCollider.offset = new Vector2(bottomCollider.size.x / 2, (float)(VO.GetSize_WorldMeter().z + .5));
+			bottomCollider.size = new Vector2((float)VO.GetSize_WorldMeter().x, borderThickness);
+			bottomCollider.offset = new Vector2(bottomCollider.size.x / 2, -(borderThickness / 2));
 
 			var topCollider = _obj.AddComponent<BoxCollider2D>();
-			topCollider.size = new Vector2((float)VO.GetSize_WorldMeter().x, 1);
-			topCollider.offset = new Vector2(topCollider.size.x / 2, -.5f);
+			topCollider.size = new Vector2((float)VO.GetSize_WorldMeter().x, borderThickness);
+			topCollider.offset = new Vector2(bottomCollider.size.x / 2, (float)(VO.GetSize_WorldMeter().z + (borderThickness / 2)));
 
 			var leftCollider = _obj.AddComponent<BoxCollider2D>();
-			leftCollider.size = new Vector2(1, (float)VO.GetSize_WorldMeter().z);
-			leftCollider.offset = new Vector2(-.5f, leftCollider.size.y / 2);
+			leftCollider.size = new Vector2(borderThickness, borderThickness + (float)VO.GetSize_WorldMeter().z + borderThickness);
+			leftCollider.offset = new Vector2(-(borderThickness / 2), (float)(VO.GetSize_WorldMeter().z / 2));
 
 			var rightCollider = _obj.AddComponent<BoxCollider2D>();
-			rightCollider.size = new Vector2(1, (float)VO.GetSize_WorldMeter().z);
-			rightCollider.offset = new Vector2((float)(VO.GetSize_WorldMeter().x + .5), rightCollider.size.y / 2);
+			rightCollider.size = new Vector2(borderThickness, borderThickness + (float)VO.GetSize_WorldMeter().z + borderThickness);
+			rightCollider.offset = new Vector2((float)(VO.GetSize_WorldMeter().x + (borderThickness / 2)), (float)(VO.GetSize_WorldMeter().z / 2));
 		}
 	}
 }

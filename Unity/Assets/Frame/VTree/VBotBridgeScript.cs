@@ -18,6 +18,15 @@ public class VBotBridgeScript : MonoBehaviour {
         Debug.Log("Game started");
 	}
 
+	bool wasConnected;
+	void Update() {
+		/*if (!socket.IsConnected)
+			socket.Connect();*/
+		if (socket.IsConnected && !wasConnected)
+			Debug.Log("Connected to VBot");
+		wasConnected = socket.IsConnected;
+	}
+
     void CallMethod(SocketIOEvent obj) {
 	    try {
 		    var methodName = obj.data.GetField("methodName").str;

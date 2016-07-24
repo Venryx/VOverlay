@@ -11,6 +11,7 @@ using VTree.BiomeDefenseN.ObjectsN;
 using VTree.VOverlayN.MapsN.MapN;
 using VTree_Structures;
 using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 namespace VTree.VOverlayN {
 	public class Race : Node {
@@ -56,6 +57,24 @@ namespace VTree.VOverlayN {
 				var player = new Player(member);
 				map.players.Add(player);
 			}*/
+
+			// add objects
+			// ==========
+
+			var platformType = VO.main.objects.objects.First(a=>a.name == "Platform");
+			var platformCount = 10;
+			for (var i = 0; i < platformCount; i++) {
+				var platform = platformType.Clone();
+				platform.map = map;
+				platform.transform.Position = new VVector3(
+					Random.Range(0, (float)VO.GetSize_WorldMeter().x)
+					, 0
+					, Random.Range(0, (float)VO.GetSize_WorldMeter().z));
+				// maybe make-so: rotation is also done
+				platform.size = new VVector3(Random.Range(2, 10), 1, .5);
+				//map.a(a=>a.structures).add = platform;
+				map.structures.Add(platform);
+			}
 
 			// activate
 			// ==========

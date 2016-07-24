@@ -97,7 +97,8 @@ namespace VTree.BiomeDefenseN.MapsN {
 			return result;
 		}
 		public void StartBuilding() {
-			// make-so: objects are built
+			foreach (var obj in GetObjects())
+				obj.Manifest();
 
 			NotifyBuildCompleted();
 		}

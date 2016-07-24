@@ -127,7 +127,7 @@ namespace VTree.BiomeDefenseN.ObjectsN {
 			if (map != null && map.match != null)
 				if (type.objType == ObjectType.Structure || type.objType == ObjectType.Plant) {
 					var collider = gameObject.AddComponent<BoxCollider2D>();
-					collider.size = Vector3.one; // make-so: this is based on obj 'size' prop
+					collider.size = size.ToVector2();
 					colliders.Add(collider);
 				}
 				else if (type.objType == ObjectType.Unit) {
@@ -138,10 +138,13 @@ namespace VTree.BiomeDefenseN.ObjectsN {
 				}
 
 			S._____("add rigidbody");
-			if (map != null && map.match != null) {
+			if (map != null && map.match != null && type.objType == ObjectType.Unit) {
 				var rigidbody = gameObject.AddComponent<Rigidbody2D>();
 				rigidbody.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-				rigidbody.mass = 1;
+				rigidbody.mass = (float)Quick.GetDouble("mass", 1);
+				rigidbody.gravityScale = (float)Quick.GetDouble("gravityScale", 10);
+				rigidbody.drag = (float)Quick.GetDouble("drag", 3);
+				rigidbody.angularDrag = (float)Quick.GetDouble("angularDrag", 1);
 			}
 
 			_hasBeenManifested = true;
@@ -264,6 +267,8 @@ namespace VTree.BiomeDefenseN.ObjectsN {
 		
 		// structure
 		// ==========
+
+		public VVector3 size;
 
 		// unit
 		// ==========

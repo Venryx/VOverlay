@@ -293,8 +293,32 @@ public static class ClassExtensions {
 	}
 
 	// Dictionary<TKey, TValue>
+	//public static TValue GetValueOrNull<TKey, TValue>(this IDictionary<TKey, TValue> self, TKey key) where TValue : class { return GetValueOrDefault(self, key, null); } // maybe temp
+	public static TValue GetValueOrX<TKey, TValue>(this IDictionary<TKey, TValue> self, TKey key, TValue defaultValueX = default(TValue)) {
+		TValue val;
+		if (self.TryGetValue(key, out val))
+			return val;
+		return defaultValueX;
+	}
+	public static TValue VAdd<TKey, TValue>(this IDictionary<TKey, TValue> s, TKey key, TValue value) {
+		try {
+			s.Add(key, value);
+			return value;
+		}
+		catch (ArgumentException ex) {
+			if (ex.Message == "An element with the same key already exists in the dictionary.")
+				ex.AddToMessage(" (key: " + key + ")");
+			throw;
+		}
+	}
+	public static void AddDictionary<TKey, TValue>(this IDictionary<TKey, TValue> s, IDictionary<TKey, TValue> other) {
+		foreach (TKey key in other.Keys)
+			s.VAdd(key, other[key]);
+	}
+
+	// Dictionary<TKey, TValue>
 	//public static TValue GetValueOrNull<TKey, TValue>(this Dictionary<TKey, TValue> self, TKey key) where TValue : class { return GetValueOrDefault(self, key, null); } // maybe temp
-	public static TValue GetValueOrX<TKey, TValue>(this Dictionary<TKey, TValue> self, TKey key, TValue defaultValueX = default(TValue)) {
+	/*public static TValue GetValueOrX<TKey, TValue>(this Dictionary<TKey, TValue> self, TKey key, TValue defaultValueX = default(TValue)) {
 		TValue val;
 		if (self.TryGetValue(key, out val))
 			return val;
@@ -314,7 +338,7 @@ public static class ClassExtensions {
 	public static void AddDictionary<TKey, TValue>(this Dictionary<TKey, TValue> s, Dictionary<TKey, TValue> other) {
 		foreach (TKey key in other.Keys)
 			s.VAdd(key, other[key]);
-	}
+	}*/
 
 	// Dictionary<TKey, TValue of struct> (e.g. Dictionary<string, bool>)
 	// commented out, since also exists in VDF system

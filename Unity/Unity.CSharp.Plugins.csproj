@@ -67,9 +67,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Plugins\ClassExtensions_Plugins.cs" />
+    <Compile Include="Assets\Plugins\SquarePieStudios Tools\Example\Inspectionary\Scripts\ComplexExample.cs" />
+    <Compile Include="Assets\Plugins\SquarePieStudios Tools\Example\Inspectionary\Scripts\CubeController.cs" />
+    <Compile Include="Assets\Plugins\SquarePieStudios Tools\Example\Inspectionary\Scripts\EnumExample.cs" />
+    <Compile Include="Assets\Plugins\SquarePieStudios Tools\Example\Inspectionary\Scripts\ExampleSceneHandler.cs" />
+    <Compile Include="Assets\Plugins\SquarePieStudios Tools\Example\Inspectionary\Scripts\PreconfiguredExample.cs" />
+    <Compile Include="Assets\Plugins\SquarePieStudios Tools\Example\Inspectionary\Scripts\PropertyTypeExample.cs" />
+    <Compile Include="Assets\Plugins\SquarePieStudios Tools\Example\Inspectionary\Scripts\SimpleExample.cs" />
+    <Compile Include="Assets\Plugins\SquarePieStudios Tools\Example\Inspectionary\Scripts\VariationExample.cs" />
+    <Compile Include="Assets\Plugins\SquarePieStudios Tools\Scripts\SerializableDictionary\InspectionaryAttribute.cs" />
+    <Compile Include="Assets\Plugins\SquarePieStudios Tools\Scripts\SerializableDictionary\PredefinedSerializableDictionaries\SerializableDictionary_Components.cs" />
+    <Compile Include="Assets\Plugins\SquarePieStudios Tools\Scripts\SerializableDictionary\PredefinedSerializableDictionaries\SerializableDictionary_Floats.cs" />
+    <Compile Include="Assets\Plugins\SquarePieStudios Tools\Scripts\SerializableDictionary\PredefinedSerializableDictionaries\SerializableDictionary_GameObjects.cs" />
+    <Compile Include="Assets\Plugins\SquarePieStudios Tools\Scripts\SerializableDictionary\PredefinedSerializableDictionaries\SerializableDictionary_Ints.cs" />
+    <Compile Include="Assets\Plugins\SquarePieStudios Tools\Scripts\SerializableDictionary\PredefinedSerializableDictionaries\SerializableDictionary_Strings.cs" />
+    <Compile Include="Assets\Plugins\SquarePieStudios Tools\Scripts\SerializableDictionary\PredefinedSerializableDictionaries\SerializableDictionary_Transforms.cs" />
+    <Compile Include="Assets\Plugins\SquarePieStudios Tools\Scripts\SerializableDictionary\PredefinedSerializableDictionaries\SerializableDictionary_Vector3.cs" />
+    <Compile Include="Assets\Plugins\SquarePieStudios Tools\Scripts\SerializableDictionary\SeralizableDictionary.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Frame\UI\EmojiText\EmojiInfo\EmojiInfo.txt" />
+    <None Include="Assets\Plugins\SquarePieStudios Tools\readme-inspectionary.txt" />
     <None Include="Assets\SocketIO\JSONObject\readme.txt" />
     <None Include="Assets\SocketIO\readme.txt" />
     <None Include="Assets\VOverlay\Objects\Effects\MagicArsenal\KunaiEditor\Editor\Readme.txt" />

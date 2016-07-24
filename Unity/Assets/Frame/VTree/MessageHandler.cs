@@ -6,6 +6,7 @@ using UnityEngine;
 using VTree;
 using System.Linq;
 using VDFN;
+using VectorStructExtensions;
 using VTree.VOverlayN.MapsN.MapN;
 using VTree_Structures;
 using WebSocketSharp.Net;
@@ -38,12 +39,12 @@ public static class MessageHandler {
 		var unit = jumperUnitType.Clone();
 		unit.map = map;
 		unit.owner = player;
-		unit.transform.Position = new VVector3(Random.Range(0, (float)VO.GetSize_WorldMeter().x), VO.unitSize / 2, 0); // only x and z are used for 2d
+		unit.transform.Position = new VVector3(Random.Range(0, (float)VO.GetSize_WorldMeter().x), 0, VO.unitSize / 2); // only x and z are used for 2d
 		//unit.emojiStr = player.chatMember.emojiStr;
 		unit.emojiStr = player.chatMember.emojiStr;
 		map.a(a=>a.units).add = unit;
 	}
-	public static void PlayerJump(string username, double x, double z, double strength) {
+	/*public static void PlayerJump(string username, double x, double z, double strength) {
 		var targetPos_normalized = new VVector3(x, 0, z) / 100;
 		var targetPos = targetPos_normalized * VO.GetSize_WorldMeter();
 
@@ -58,5 +59,21 @@ public static class MessageHandler {
 		var forceVector = posDif.ToVector2().normalized * (float)strength;
 		//Debug.Log("Adding force. TargetPos: " + targetPos + " === PosDif: " + posDif + " === ForceVector: " + forceVector);
 		rigidbody.AddForce(forceVector, ForceMode2D.Force);
+	}*/
+	public static void PlayerJump(string username, double angle, double strength) {
+		strength = strength.KeepBetween(0, 100);
+
+		var match = VO.main.race.liveMatch;
+		var unit = match.map.units.FirstOrDefault(a=>a.owner.chatMember.name == username);
+		if (unit == null)
+			return;
+		var rigidbody = unit.gameObject.GetComponent<Rigidbody2D>();
+		var posDif = Quaternion.AngleAxis((float)-angle, Vector3.forward) * Vector3.up;
+
+		var finalStrength = strength * Quick.GetDouble("jumpStrength");
+		//var forceVector = posDif.ToVector2().normalized * (float)finalStrength;
+		var forceVector = posDif.ToVector2().normalized * (float)finalStrength;
+		//Debug.Log("Adding force. TargetPos: " + targetPos + " === PosDif: " + posDif + " === ForceVector: " + forceVector);
+		rigidbody.AddForce(forceVector, ForceMode2D.Impulse);
 	}
 }

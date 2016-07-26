@@ -549,6 +549,19 @@ public static class ClassExtensions {
 		return result;
 	}
 
+	// TextMesh
+	public static void SetUpFontAtlas(this TextMesh textMesh) {
+		textMesh.text = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+		textMesh.font.characterInfo = null;
+		textMesh.font.RequestCharactersInTexture(textMesh.text, textMesh.fontSize, textMesh.fontStyle);
+	}
+	public static void FixFontAtlas(this TextMesh text, bool deleteFontCharacterInfo = false) {
+		if (deleteFontCharacterInfo)
+			text.font.characterInfo = null;
+		text.font.RequestCharactersInTexture(text.text, text.fontSize, text.fontStyle);
+		//text.FontTextureChanged();
+	}
+
 	// Bounds
 	public static VBounds ToVBounds(this Bounds self) { return new VBounds(self.min.ToVVector3(), self.size.ToVVector3()); }
 	public static List<Vector3> GetCorners(this Bounds obj, bool includePosition = true)

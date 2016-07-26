@@ -22,7 +22,7 @@ namespace VTree {
 		// project constants
 		public const double pixelsPerMeter = 30;
 		public static VVector3 GetSize_WorldPixels() { return new VVector3(1920, 0, 1080); }
-		public static VVector3 GetSize_WorldMeter() { return GetSize_WorldPixels() / pixelsPerMeter; }
+		public static VVector3 GetSize_WorldMeter() { return GetSize_WorldPixels() / pixelsPerMeter; } // 64, 0, 36
 
 		public const float unitSize = 3;
 	}
@@ -133,6 +133,7 @@ namespace VTree {
 		[VDFProp(popOutL2: true)] public Maps maps;
 		[VDFProp(popOutL2: true)] public Objects objects;
 		[VDFProp(popOutL2: true)] public Race race;
+		[VDFProp(popOutL2: true)] public Tower tower;
 
 		// unity-linked properties
 		// ==========
@@ -156,8 +157,18 @@ namespace VTree {
 			_launched = true;
 
 			// this is the only page atm, so always start it out visible
-			race.a(a=>a.visible).set = true;
+			//race.a(a=>a.visible).set = true;
 		}
+
+		/*void MakePageVisible(string pageName) {
+			/*var pageProp = this.GetVTypeInfo().props[propName];
+			var pageValue = pageProp.GetValue(this);
+			pageValue.GetVTypeInfo().*#/
+			if (pageName == "race")
+				s.race.a(a=>a.visible).set = true;
+			else if (pageName == "tower")
+				s.tower.a(a=>a.visible).set = true;
+		}*/
 
 		public void LoadDataAndLaunch() {
 			var S = M.GetCurrentMethod().Profile_AllFrames();
@@ -316,7 +327,7 @@ namespace VTree {
 			CallMethod(null, "PreViewFrameTick", viewFrame + 1); // use this full/final overload, so extra call-stack-entry doesn't get made
 
 			if (VInput.GetKeyDown(KeyCode.Return)) {
-				if (!chatInputBox.gameObject.activeSelf) {
+				/*if (!chatInputBox.gameObject.activeSelf) {
 					chatInputBox.gameObject.SetActive(true);
 					chatInputBox.ActivateInputField();
 				}
@@ -325,8 +336,13 @@ namespace VTree {
 					GameObject.Find("ChatInputBox").GetComponent<InputField>().text = "";
 					VBotBridge.OnLocalChatMessageAdded(message);
 					chatInputBox.gameObject.SetActive(false);
-				}
+				}*/
+				var message = GameObject.Find("ChatInputBox").GetComponent<InputField>().text;
+				GameObject.Find("ChatInputBox").GetComponent<InputField>().text = "";
+				VBotBridge.OnLocalChatMessageAdded(message);
 			}
+			chatInputBox.gameObject.GetComponent<Image>().enabled = chatInputBox.gameObject.GetComponent<InputField>().text.Length > 0;
+			chatInputBox.ActivateInputField();
 		}
 
 		public float _timeAtEndOfLastFrame;

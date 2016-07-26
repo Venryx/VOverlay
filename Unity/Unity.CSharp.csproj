@@ -97,6 +97,9 @@
     <Compile Include="Assets\Frame\Globals\VMeta.cs" />
     <Compile Include="Assets\Frame\Globals\VPhysics.cs" />
     <Compile Include="Assets\Frame\Globals\VResources.cs" />
+    <Compile Include="Assets\Frame\Others\BuildHelper.cs" />
+    <Compile Include="Assets\Frame\Others\MeshData.cs" />
+    <Compile Include="Assets\Frame\Others\QuadTreeNode.cs" />
     <Compile Include="Assets\Frame\Others\VectorStructs.cs" />
     <Compile Include="Assets\Frame\UI\EmojiText\Scripts\EmojiAdder.cs" />
     <Compile Include="Assets\Frame\UI\EmojiText\Scripts\EmojiAdderScript.cs" />
@@ -189,6 +192,7 @@
     <Compile Include="Assets\SocketIO\WebsocketSharp\WebSocketState.cs" />
     <Compile Include="Assets\SocketIO\WebsocketSharp\WebSocketStream.cs" />
     <Compile Include="Assets\VOverlay.cs" />
+    <Compile Include="Assets\VOverlay\@Shared\Match.cs" />
     <Compile Include="Assets\VOverlay\Maps.cs" />
     <Compile Include="Assets\VOverlay\Maps\Map.cs" />
     <Compile Include="Assets\VOverlay\Maps\Map\Player.cs" />
@@ -206,14 +210,19 @@
     <Compile Include="Assets\VOverlay\Objects\Effects\MagicArsenal\Scripts\lightScript.cs" />
     <Compile Include="Assets\VOverlay\Objects\Effects\MagicArsenal\Scripts\lightScriptLong.cs" />
     <Compile Include="Assets\VOverlay\Objects\VObject.cs" />
+    <Compile Include="Assets\VOverlay\Objects\VObject\Components\Block.cs" />
+    <Compile Include="Assets\VOverlay\Objects\VObject\Components\Emoji.cs" />
     <Compile Include="Assets\VOverlay\Objects\VObject\Components\General.cs" />
     <Compile Include="Assets\VOverlay\Objects\VObject\Components\Mesh.cs" />
+    <Compile Include="Assets\VOverlay\Objects\VObject\Components\Platform.cs" />
     <Compile Include="Assets\VOverlay\Objects\VObject\Components\Transform.cs" />
     <Compile Include="Assets\VOverlay\Objects\VObject\VComponent.cs" />
     <Compile Include="Assets\VOverlay\Objects\VObjectExtras.cs" />
     <Compile Include="Assets\VOverlay\Objects\VObject_Type.cs" />
     <Compile Include="Assets\VOverlay\Race.cs" />
-    <Compile Include="Assets\VOverlay\Race\Match.cs" />
+    <Compile Include="Assets\VOverlay\Race\RaceMatch.cs" />
+    <Compile Include="Assets\VOverlay\Tower.cs" />
+    <Compile Include="Assets\VOverlay\TowerMatch.cs" />
     <Compile Include="Assets\VOverlayScript.cs" />
   </ItemGroup>
   <ItemGroup>

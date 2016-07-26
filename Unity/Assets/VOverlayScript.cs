@@ -26,5 +26,9 @@ public class VOverlayScript : MonoBehaviour {
 	void LateUpdate() { VO.main.LateUpdate(); }
 
 	public Font font;
+	public Material fontMaterial;
+	//public Font font2;
 	public List<GameObject> effects;
+	public List<PhysicsMaterial2D> physicsMaterials;
+	public Material tower_blockMaterial;
 }

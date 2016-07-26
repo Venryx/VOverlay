@@ -17,7 +17,10 @@ using VTree.BiomeDefenseN.MapsN;
 using VTree.BiomeDefenseN.MapsN.MapN;
 using VTree.BiomeDefenseN.MatchesN;
 using VTree.BiomeDefenseN.ObjectsN.ObjectN.ComponentsN;
+using VTree.VOverlayN.MapsN;
 using VTree.VOverlayN.MapsN.MapN;
+using VTree.VOverlayN.ObjectsN.ObjectN.ComponentsN;
+using VTree.VOverlayN.SharedN;
 using VTree_Structures;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
@@ -123,7 +126,7 @@ namespace VTree.BiomeDefenseN.ObjectsN {
 			s.transform.ApplyTransform();
 			//transform.PostTransformChange();
 
-			S._____("add collider");
+			/*S._____("add collider");
 			if (map != null && map.match != null)
 				if (type.objType == ObjectType.Structure || type.objType == ObjectType.Plant) {
 					var collider = gameObject.AddComponent<BoxCollider2D>();
@@ -135,34 +138,29 @@ namespace VTree.BiomeDefenseN.ObjectsN {
 					//collider.offset = new Vector2(.25f, .25f);
 					collider.radius = VO.unitSize / 2;
 					colliders.Add(collider);
-				}
-
-			S._____("add rigidbody");
-			if (map != null && map.match != null && type.objType == ObjectType.Unit) {
-				var rigidbody = gameObject.AddComponent<Rigidbody2D>();
-				rigidbody.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-				rigidbody.mass = (float)Quick.GetDouble("mass", 1);
-				rigidbody.gravityScale = (float)Quick.GetDouble("gravityScale", 10);
-				rigidbody.drag = (float)Quick.GetDouble("drag", 3);
-				rigidbody.angularDrag = (float)Quick.GetDouble("angularDrag", 1);
-			}
+				}*/
 
 			_hasBeenManifested = true;
 
-			S._____("post-manifest");
-			BroadcastMessage(ContextGroup.Local_CS, "PostManifest"); // maybe temp
+			S._____("manifest descendents");
+			foreach (var child in _children)
+				child.BroadcastMessage(ContextGroup.Local_CS, "Manifest");
 
 			S._____(null);
 			return result;
 		}
 		public void Unmanifest() {
 			V.Destroy(gameObject);
-			mesh.Unmanifest();
+			foreach (var child in _children)
+				child.BroadcastMessage(ContextGroup.Local_CS, "Unmanifest");
 		}
 		void _PreRemoveFromMainTree() { Unmanifest(); }
 
 		[NotTo("objType,js")] public VTransform transform = new VTransform();
 		[NotTo("obj")] public MeshComp mesh = new MeshComp();
+		[NotTo("obj")] public Platform platform;
+		[NotTo("obj")] public Emoji emoji;
+		[NotTo("obj")] public Block block;
 
 		// update
 		// ==========
@@ -172,12 +170,10 @@ namespace VTree.BiomeDefenseN.ObjectsN {
 				return;
 
 			//S._____("ripple call to components");
-			if (transform != null)
-				transform.PreViewFrameTick();
-			if (mesh != null)
-				mesh.PreViewFrameTick();
-			//if (isProjectile != null)
-			//	isProjectile.PreViewFrameTick();
+			if (transform != null) transform.PreViewFrameTick();
+			if (platform != null) platform.PreViewFrameTick();
+			if (emoji != null) emoji.PreViewFrameTick();
+			if (block != null) block.PreViewFrameTick();
 		}
 		
 		public int lastProcessedFrame = -1;
@@ -185,10 +181,9 @@ namespace VTree.BiomeDefenseN.ObjectsN {
 			lastProcessedFrame = frame;
 
 			// ripple call to components
-			if (mesh != null)
-				mesh.PostDataFrameTick();
-			if (isProjectile != null)
-				isProjectile.PostDataFrameTick();
+			if (platform != null) platform.PreViewFrameTick();
+			if (emoji != null) emoji.PreViewFrameTick();
+			if (isProjectile != null) isProjectile.PostDataFrameTick();
 
 			transform.PostDataFrameTick(); // call this last, since it should update bounds only once at end of frame
 		}
@@ -267,8 +262,6 @@ namespace VTree.BiomeDefenseN.ObjectsN {
 		
 		// structure
 		// ==========
-
-		public VVector3 size;
 
 		// unit
 		// ==========

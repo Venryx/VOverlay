@@ -9,15 +9,17 @@ using VectorStructExtensions;
 using VTree.BiomeDefenseN.MapsN;
 using VTree.BiomeDefenseN.ObjectsN;
 using VTree.BiomeDefenseN.ObjectsN.ObjectN;
+using VTree.VOverlayN.MapsN;
+using VTree.VOverlayN.MapsN.MapN;
+using VTree.VOverlayN.SharedN;
 using VTree_Structures;
 using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 namespace VTree.BiomeDefenseN.MatchesN {
-	public class Match : Node {
-		Match s;
+	public class RaceMatch : Match {
+		RaceMatch s;
 
-		public bool started;
-		public bool paused;
 		[IgnoreStartData] void paused_PostSet() { UpdateRigidbodyFreeze(); }
 		void UpdateRigidbodyFreeze() {
 			/*var constraints = paused ? RigidbodyConstraints.FreezeAll : RigidbodyConstraints.None;
@@ -34,44 +36,11 @@ namespace VTree.BiomeDefenseN.MatchesN {
 					rigidbody.velocity = rigidbody.GetMeta<Vector3>("oldVelocity");
 				}
 		}
-		public bool finished;
 		[IgnoreStartData] void finished_PostSet() {
 			if (finished)
 				UpdateRigidbodyFreeze();
 		}
-		public bool _InProgress { get { return started && !finished; } }
-		public bool _Running { get { return started && !paused && !finished; } }
-
-		//public ScriptContext scriptContext;
-
-		[P(false)] public GameObject obj;
-
-		public Map map;
-		/*void map_PostSet() {
-			var treeRect = map.terrain.GetTreeRect();
-			_units_tree = new QuadTreeNode<VObject>(treeRect);
-		}*/
-		//public List<Player> players = new List<Player>();
-		//public Player _LocalHumanPlayer { get { return players.First(a=>a.ai == null); } }
-
-		[P(false)] public bool coreMapInitDone;
-		[NoAutoProfile] public void NotifyPostCoreMapInit() { coreMapInitDone = true; }
-
-		public bool fogOfWar;
-
-		public List<VObject> GetObjects(bool plants = true, bool structures = true, bool units = true, bool others = true) {
-			var result = new List<VObject>();
-			if (plants)
-				result.AddRange(map.plants);
-			if (structures)
-				result.AddRange(map.structures);
-			if (units)
-				result.AddRange(map.units);
-			if (others)
-				result.AddRange(map.projectiles);
-			return result;
-		}
-
+		
 		public void StartBuilding() {
 			var S = M.GetCurrentMethod().Profile_AllFrames();
 
@@ -85,23 +54,48 @@ namespace VTree.BiomeDefenseN.MatchesN {
 			S._____(null);
 		}
 		void BuildMap(Map map) {
-			var S = M.GetCurrentMethod().Profile_AllFrames();
-
 			//V.ShowLoadingScreen("Building map...", captureMouseFocus: false);
 
 			var mapObj = map.BuildGameObject();
 			mapObj.transform.parent = obj.transform;
 			mapObj.layer = LayerMask.NameToLayer("TransparentFX");
 
-			//Chunk.CalculateSoilOpacitiesCache.Start(map);
 			map.StartBuilding();
-			map.RunXOnBuildCompleted(()=> {
-				//Chunk.CalculateSoilOpacitiesCache.Stop();
-				//V.HideLoadingScreen();
-			});
-
-			S._____(null);
+			//map.RunXOnBuildCompleted(V.HideLoadingScreen);
 		}
+
+		// general
+		// ==========
+
+		void AddPlayer(string username, string emoji_encodedStr) {
+			// if player already exists, remove first
+			var oldPlayer = map.players.FirstOrDefault(a=>a.chatMember.name == username);
+			if (oldPlayer != null) {
+				map.a(a=>a.units).remove = map.units.First(a=>a.owner.chatMember.name == username);
+				map.a(a=>a.players).remove = oldPlayer;
+			}
+
+			//var emoji = HttpUtility.UrlDecode(emoji_encodedStr.SubstringSE(1, emoji_encodedStr.Length - 1));
+			var emoji = Uri.UnescapeDataString(emoji_encodedStr.SubstringSE(1, emoji_encodedStr.Length - 1));
+			if (!EmojiAdder.GetUVRectForEmojiChar(emoji).HasValue)
+				return;
+
+			var member = new ChatMember(username, VColor.Blue, emoji);
+			var player = new Player(member);
+			map.a(a=>a.players).add = player;
+
+			var jumperUnitType = VO.main.objects.objects.First(a=>a.name == "Jumper");
+			var unit = jumperUnitType.Clone();
+			unit.map = map;
+			unit.owner = player;
+			unit.transform.Position = new VVector3(Random.Range(0, (float)VO.GetSize_WorldMeter().x), 0, VO.unitSize / 2); // only x and z are used for 2d
+			//unit.emojiStr = player.chatMember.emojiStr;
+			unit.emojiStr = player.chatMember.emojiStr;
+			map.a(a=>a.units).add = unit;
+		}
+
+		// update stuff
+		// ==========
 
 		//void PreViewFrameTick()
 		Action _preViewFrameTick; void _PreRemoveFromMainTree_EM1() { VO.main.RemoveExtraMethod("PreViewFrameTick", _preViewFrameTick); }
@@ -116,20 +110,6 @@ namespace VTree.BiomeDefenseN.MatchesN {
 				if (obj.Parent != null) // if object hasn't been destroyed/removed during looping
 					obj.PreViewFrameTick(VO.main.viewFrame);
 		}
-
-		// data-frame stuff
-		// ==========
-
-		public int dataFrame;
-		public int dataFramesPerSecond = 30;
-		public double SecondsPerDataFrame { get { return 1d / dataFramesPerSecond; } }
-		public class DataFrameFor_Class {
-			public DataFrameFor_Class(Match match) { this.match = match; }
-			public Match match;
-			public int XSecondsFromNow(double seconds) { return XSecondsFromFrameY(seconds, match.dataFrame); }
-			public int XSecondsFromFrameY(double seconds, int frameY) { return frameY + (int)(seconds * match.dataFramesPerSecond); }
-		}
-		public DataFrameFor_Class DataFrameFor { get { return new DataFrameFor_Class(s); } }
 		
 		[IgnoreStartData, NoAutoProfile] void dataFrame_PostSet() {
 			var S = M.GetCurrentMethod().Profile_LastDataFrame();
@@ -153,17 +133,6 @@ namespace VTree.BiomeDefenseN.MatchesN {
 		}
 		void CheckForVictoryConditions() {
 			// make-so: this ends the game a while after someone reaches the target
-		}
-		
-		// data-frame-related view-frame-tick handler
-		void PreViewFrameTick_EM2() {
-			if (!_Running)
-				return;
-
-			// for now, data-frame is same as view-frame
-			Profiler_LastDataFrame.PreDataFrameTick(); // first call profiler, so it can set up profiling for this upcoming frame
-			s.a(a=>a.dataFrame).set = dataFrame + 1;
-			Profiler_LastDataFrame.PostDataFrameTick(); // notify end of data-frame portion; rest gets put into "after-data-frame view-frame processing"
 		}
 	}
 }

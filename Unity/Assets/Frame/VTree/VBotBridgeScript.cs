@@ -7,6 +7,9 @@ using SocketIO;
 using VDFN;
 
 public class VBotBridgeScript : MonoBehaviour {
+	public static VBotBridgeScript main;
+	public VBotBridgeScript() { main = this; }
+
 	public SocketIOComponent socket;
     
 	void Start() {

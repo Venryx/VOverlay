@@ -1020,6 +1020,7 @@ namespace VectorStructExtensions // make the file opt-in to adding these extensi
 			return new VVector2(s.x, s.y);
 		}
 		public static Vector3 ToVector3(this Vector2 s) { return s; }
+		public static VVector3 ToVVector3_(this Vector2 s, bool fromYUpToForward = true) { return ((Vector3)s).ToVVector3(fromYUpToForward); } // custom
 		public static Vector4 ToVector4(this Vector2 s) { return s; }
 
 		// Vector3

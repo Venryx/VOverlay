@@ -9,6 +9,7 @@ using VTree.BiomeDefenseN.MapsN.MapN;
 using VTree.BiomeDefenseN.MatchesN;
 using VTree.BiomeDefenseN.ObjectsN;
 using VTree.VOverlayN.MapsN.MapN;
+using VTree.VOverlayN.SharedN;
 using VTree_Structures;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
@@ -21,24 +22,20 @@ namespace VTree.VOverlayN {
 		public GameObject _gameObject;
 
 		[NotTo("file")] public bool visible;
-		void visible_PostSet() {
-			_gameObject.SetActive(visible);
-			if (visible) {
-				// make-so: game is launched
-			}
-		}
+		void visible_PostSet() { _gameObject.SetActive(visible); }
+		public void MakeVisible() { s.a(a=>a.visible).set = true; }
 
 		// general
 		// ==========
 
-		public void StartNewRace() {
+		public void StartNewMatch() {
 			var S = M.GetCurrentMethod().Profile_AllFrames();
 
 			if (liveMatch != null)
 				s.a(a=>a.liveMatch).set = null;
 			
 			S._____("clone map");
-			var match = new Match();
+			var match = new RaceMatch();
 			var mapType = VO.main.maps.GetRandomMapType();
 			var map = mapType.Clone();
 
@@ -71,7 +68,7 @@ namespace VTree.VOverlayN {
 					, 0
 					, Random.Range(0, (float)VO.GetSize_WorldMeter().z));
 				// maybe make-so: rotation is also done
-				platform.size = new VVector3(Random.Range(2, 10), 1, .5);
+				platform.platform.size = new VVector3(Random.Range(2, 10), 1, .5);
 				//map.a(a=>a.structures).add = platform;
 				map.structures.Add(platform);
 			}
@@ -82,7 +79,7 @@ namespace VTree.VOverlayN {
 			LoadMatch(match);
 			StartMatch(match);
 		}
-		void LoadMatch(Match match) {
+		void LoadMatch(RaceMatch match) {
 			var S = M.GetCurrentMethod().Profile_AllFrames();
 			//var map = match.map;
 
@@ -110,9 +107,9 @@ namespace VTree.VOverlayN {
 			}
 		}*/
 
-		void StartMatch(Match match) { match.a(a=>a.started).set = true; }
+		void StartMatch(RaceMatch match) { match.a(a=>a.started).set = true; }
 
-		[P(false)] public Match liveMatch;
+		[P(false)] public RaceMatch liveMatch;
 		[IgnoreStartData] void liveMatch_PreSet() {
 			if (liveMatch != null) // if live-match is being closed
 				V.Destroy(liveMatch.obj);

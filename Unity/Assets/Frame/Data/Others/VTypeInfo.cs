@@ -87,6 +87,7 @@ public class VPropInfo {
 			return ((FieldInfo)memberInfo).GetValue(objParent);
 		return ((PropertyInfo)memberInfo).GetValue(objParent, null);
 	}
+	public object GetValue<T>(object objParent) { return (T)GetValue(objParent); }
 	public void SetValue(object objParent, object value) {
 		// maybe temp; fixes that List(Type) from JS gets received as a List(MonoType)
 		//if (GetPropType() == typeof(List<Type>) && value != null && value.GetType().Name == "System.Collections.Generic.List`1[System.MonoType]")

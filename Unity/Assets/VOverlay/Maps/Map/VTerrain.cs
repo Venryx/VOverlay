@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using VDFN;
+using VTree.VOverlayN.MapsN;
 using VTree_Structures;
 
 namespace VTree.BiomeDefenseN.MapsN.MapN {
@@ -33,6 +35,10 @@ namespace VTree.BiomeDefenseN.MapsN.MapN {
 			var rightCollider = _obj.AddComponent<BoxCollider2D>();
 			rightCollider.size = new Vector2(borderThickness, borderThickness + (float)VO.GetSize_WorldMeter().z + borderThickness);
 			rightCollider.offset = new Vector2((float)(VO.GetSize_WorldMeter().x + (borderThickness / 2)), (float)(VO.GetSize_WorldMeter().z / 2));
+
+			var colliders = new List<BoxCollider2D> {bottomCollider, topCollider, leftCollider, rightCollider};
+			foreach (var collider in colliders)
+				collider.sharedMaterial = VO.main.script.physicsMaterials[0];
 		}
 	}
 }

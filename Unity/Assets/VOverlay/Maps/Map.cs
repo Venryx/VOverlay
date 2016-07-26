@@ -12,6 +12,7 @@ using VTree.BiomeDefenseN.MapsN.MapN;
 using VTree.BiomeDefenseN.MatchesN;
 using VTree.BiomeDefenseN.ObjectsN;
 using VTree.VOverlayN.MapsN.MapN;
+using VTree.VOverlayN.SharedN;
 using VTree_Structures;
 using Object = UnityEngine.Object;
 
@@ -29,7 +30,7 @@ public class MapInfo {
 	[VDFProp] public string name;
 }
 
-namespace VTree.BiomeDefenseN.MapsN {
+namespace VTree.VOverlayN.MapsN {
 	[VDFType(popOutL1: true)] public class Map : Node {
 		Map s;
 		[VDFPreDeserialize] public Map() {}

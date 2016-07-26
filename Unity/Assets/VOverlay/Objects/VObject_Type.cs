@@ -86,7 +86,6 @@ namespace VTree.BiomeDefenseN.ObjectsN {
 			transform.PostObjGameObjectSet();
 
 			mesh.obj = s; // early set
-			mesh.PostObjGameObjectSet();
 		}
 		public void SaveMainData() {
 			var vdf = VConvert.ToVDF(this, options: new VDFSaveOptionsV(toFile: true, toObjType: true));

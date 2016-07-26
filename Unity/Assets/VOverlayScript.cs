@@ -25,8 +25,9 @@ public class VOverlayScript : MonoBehaviour {
 	void Update() { VO.main.Update(); }
 	void LateUpdate() { VO.main.LateUpdate(); }
 
-	public Font font;
-	public Material fontMaterial;
+	public Font mainFont;
+	public Font emojiFont;
+
 	//public Font font2;
 	public List<GameObject> effects;
 	public List<PhysicsMaterial2D> physicsMaterials;

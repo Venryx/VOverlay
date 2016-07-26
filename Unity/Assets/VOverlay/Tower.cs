@@ -31,9 +31,12 @@ namespace VTree.VOverlayN {
 		public void StartNewMatch() {
 			var S = M.GetCurrentMethod().Profile_AllFrames();
 
-			if (liveMatch != null)
+			var oldPlayers = new List<Player>();
+			if (liveMatch != null) {
+				oldPlayers = liveMatch.map.players;
 				s.a(a=>a.liveMatch).set = null;
-			
+			}
+
 			S._____("clone map");
 			var match = new TowerMatch();
 			var mapType = VO.main.maps.GetRandomMapType();
@@ -44,29 +47,45 @@ namespace VTree.VOverlayN {
 			match.map = map;
 			map.match = match;
 
+			// re-add old players (as new Player instances)
+			// ==========
+
+			foreach (var oldPlayer in oldPlayers) {
+				var player = new Player(oldPlayer.chatMember);
+				map.players.Add(player);
+			}
+			if (oldPlayers.Count > 0)
+				match.currentPlayer = oldPlayers[0];
+
+			// set up terrain
+			// ==========
+
+			map.terrain.sideAndTopBoundaries = false;
+
 			// add tower-blocks
 			// ==========
 
-			var towerCenter_x = 32;
-
-			//var blockType = new VObject_Type {name = "Block"};
+			var towerCenter_x = 52;
 			var blockType = VO.main.objects.objects.First(a=>a.name == "Block");
-			for (var z = 0; z < 32; z++) {
-				var rowOffset = Random.Range(0, 1f);
+			var size = new Vector2(3, 1.5f);
+			var half = size / 2;
+			for (var z = 0; z < 20; z++) {
+				var rowOffset = Random.Range(0, .7f) * size.x;
 				for (var i = 0; i < 3; i++) {
 					var block = blockType.Clone();
 					block.map = map;
 					block.block.number = match.nextBlockNumber++;
 
-					var cellOffset = i * 2;
-					block.transform.Position = new VVector3(towerCenter_x + rowOffset + cellOffset, 0, z + .5);
+					var cellOffset = i * size.x;
+					cellOffset += Random.Range(0, .3f) * size.x;
+					block.transform.Position = new VVector3(towerCenter_x + rowOffset + cellOffset, 0, .5 + (z * size.y));
 
 					var distanceMultiplier = .95f;
 					block.block.vertexes = new List<Vector2> {
-						new Vector2(-1 * distanceMultiplier, .5f * distanceMultiplier), // left top
-						new Vector2(1 * distanceMultiplier, .5f * distanceMultiplier), // right top
-						new Vector2(1 * distanceMultiplier, -.5f * distanceMultiplier), // right down
-						new Vector2(-1 * distanceMultiplier, -.5f * distanceMultiplier) // left down
+						new Vector2(-half.x * distanceMultiplier, half.y * distanceMultiplier), // left top
+						new Vector2(half.x * distanceMultiplier, half.y * distanceMultiplier), // right top
+						new Vector2(half.x * distanceMultiplier, -half.y * distanceMultiplier), // right down
+						new Vector2(-half.x * distanceMultiplier, -half.y * distanceMultiplier) // left down
 					};
 					block.block.triangleVertexIndexes = new List<int> {
 						0, 1, 3,
@@ -82,6 +101,8 @@ namespace VTree.VOverlayN {
 
 			LoadMatch(match);
 			StartMatch(match);
+
+			S._____(null);
 		}
 		void LoadMatch(TowerMatch match) {
 			s.a(a=>a.liveMatch).set = match;

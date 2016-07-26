@@ -1,3 +1,7 @@
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,7 +12,6 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 using System;
 using System.Collections;
-using UnityEditor;
 using VDFN;
 using VectorStructExtensions;
 using VTree;
@@ -17,13 +20,6 @@ using Object = UnityEngine.Object;
 using Random = System.Random;
 
 public static class ClassExtensions {
-	// object
-	public static VNullClass SetMeta(this object obj, object metaKey, VNullClass metaValue, bool useStrongStorage = true) { return VMeta.main.SetMeta(obj, metaKey, metaValue, useStrongStorage); } // for null
-	public static T SetMeta<T>(this object obj, object metaKey, T metaValue, bool useStrongStorage = true) { return VMeta.main.SetMeta(obj, metaKey, metaValue, useStrongStorage); }
-	public static T GetMeta<T>(this object obj, object metaKey) { return VMeta.main.GetMeta<T>(obj, metaKey); }
-	public static object GetMeta(this object obj, object metaKey) { return VMeta.main.GetMeta(obj, metaKey); }
-	public static T GetMeta<T>(this object obj, object metaKey, T returnValueIfMissing, bool useStrongStorage = true) { return VMeta.main.GetMeta(obj, metaKey, returnValueIfMissing, useStrongStorage); }
-	public static void ClearMeta(this object obj, bool useStrongStorage = true) { VMeta.main.ClearMeta(obj, useStrongStorage); }
 	//public static Type GetType_Safe<T>(this object obj) { return obj.GetType_Safe(typeof(T)); }
 	//public static Type GetType_Safe(this object obj, Type fallbackType = null) { return obj != null ? obj.GetType() : fallbackType; }
 	public static double ToDouble(this object s) {
@@ -46,6 +42,7 @@ public static class ClassExtensions {
 	}
 
 	// string
+	public static string Capitalize(this string s) { return s[0].ToString().ToUpper() + s.Substring(1); }
 	public static string TrimStart(this string s, int length) { return s.Substring(length); }
 	public static string TrimEnd(this string s, int length) { return s.Substring(0, s.Length - length); }
 	public static string SubstringSE(this string self, int startIndex, int enderIndex) { return self.Substring(startIndex, enderIndex - startIndex); }
@@ -201,6 +198,10 @@ public static class ClassExtensions {
 	public static List<T> CAdd<T>(this List<T> s, T item) {
 		s.Add(item);
 		return s;
+	}
+	public static T VAdd<T>(this List<T> s, T item) {
+		s.Add(item);
+		return item;
 	}
 	public static void AddIfNotNull<T>(this List<T> s, T item) { //where T : class
 		if (item != null)
@@ -633,6 +634,7 @@ public static class ClassExtensions {
 			result = -result;
 		return result;
 	}
+	public static bool IsMultipleOf(this int s, int val) { return s % val == 0; }
 	public static int FloorToMultipleOf(this int s, int val) { return (int)(Math.Floor((double)s / val) * val); }
 	public static int RoundToMultipleOf(this int s, int val) { return (int)(Math.Round((double)s / val) * val); }
 	public static int CeilingToMultipleOf(this int s, int val) { return (int)(Math.Ceiling((double)s / val) * val); }
@@ -886,9 +888,11 @@ public static class ClassExtensions {
 
 	//public static Action<string> Start(this MethodBase s) { return VSection.Start(s); }
 	public static BlockRunInfo Profile_AllFrames(this MethodBase s, string title = null) {
-		if (title != null)
+		/*if (title != null)
 			return Profiler_AllFrames.CurrentBlock.StartMethod(title);
-		return Profiler_AllFrames.CurrentBlock.StartMethod(s);
+		return Profiler_AllFrames.CurrentBlock.StartMethod(s);*/
+
+		return BlockRunInfo.fakeBlockRunInfo; // maybe temp; don't actually profile
 	}
 	// use M.None instead
 	//public static BlockRunInfo Profile_AllFrames_DISABLED(this MethodBase s, string title = null) { return BlockRunInfo.fakeBlockRunInfo; }
@@ -900,6 +904,8 @@ public static class ClassExtensions {
 		return Profiler_LastViewFrame.CurrentBlock.StartMethod(s);
 	}*/
 	public static BlockRunInfo Profile_LastDataFrame(this MethodBase s, string title = null, bool actuallyProfile = true) {
+		return BlockRunInfo.fakeBlockRunInfo; // maybe temp; don't actually profile
+
 		if (!actuallyProfile)
 			return BlockRunInfo.fakeBlockRunInfo;
 
@@ -1096,12 +1102,6 @@ public static class ClassExtensions {
 			result.nodes.Add(new VDFNodePathNode(null, ));
 		}
 	}*/
-
-	// Object
-	// make-so: this works in player
-	public static bool IsInAsset(this Object s) {
-		return AssetDatabase.Contains(s) || AssetDatabase.IsSubAsset(s) || PrefabUtility.GetPrefabParent(s) || PrefabUtility.GetPrefabObject(s) || AssetDatabase.GetAssetPath(s) != "";
-	}
 
 	// WWW
 	public static Texture2D GetTexture(this WWW self, bool generateMipMaps = true)

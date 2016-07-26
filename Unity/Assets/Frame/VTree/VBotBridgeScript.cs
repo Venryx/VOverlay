@@ -33,7 +33,7 @@ public class VBotBridgeScript : MonoBehaviour {
     void CallMethod(SocketIOEvent obj) {
 	    try {
 		    var methodName = obj.data.GetField("methodName").str;
-		    var argsJSON = obj.data.GetField("argsJSON").str;
+		    var argsJSON = obj.data.GetField("argsJSON").str.Replace("\\\"", "\"");
 		    var args = VConvert.FromVDF<List<object>>(argsJSON, new VDFLoadOptions().ForJSON());
 
 		    Debug.Log("CallingMethod:" + methodName + " === argsLength:" + args.Count + " === argsVDF:" + argsJSON);

@@ -11,6 +11,7 @@ using VTree.BiomeDefenseN.MapsN;
 using VTree.BiomeDefenseN.MapsN.MapN;
 using VTree.BiomeDefenseN.ObjectsN.ObjectN;
 using VTree.BiomeDefenseN.ObjectsN.ObjectN.ComponentsN;
+using VTree.VOverlayN.TowerN;
 using VTree_Structures;
 
 namespace VTree.VOverlayN.ObjectsN.ObjectN.ComponentsN {
@@ -27,6 +28,7 @@ namespace VTree.VOverlayN.ObjectsN.ObjectN.ComponentsN {
 		MeshFilter filter;
 		MeshRenderer renderer;
 		PolygonCollider2D collider;
+		//BoxCollider2D collider;
 		Rigidbody2D rigidbody;
 
 		GameObject textSub;
@@ -41,6 +43,7 @@ namespace VTree.VOverlayN.ObjectsN.ObjectN.ComponentsN {
 			UpdateMaterial();
 
 			collider = obj.gameObject.AddComponent<PolygonCollider2D>();
+			//collider = obj.gameObject.AddComponent<BoxCollider2D>();
 			UpdateCollider();
 
 			// add rigidbody
@@ -59,8 +62,8 @@ namespace VTree.VOverlayN.ObjectsN.ObjectN.ComponentsN {
 			textSub.transform.localPosition = Vector3.zero;
 			textSub.transform.localScale = Vector3.one * .3f;
 			textMesh = textSub.AddComponent<TextMesh>();
-			textMesh.font = VO.main.script.font;
-			//textMesh.fontSize = 30;
+			textMesh.font = VO.main.script.mainFont;
+			textMesh.fontSize = 30;
 			textMesh.anchor = TextAnchor.MiddleCenter;
 			textMesh.alignment = TextAlignment.Center;
 			textMesh.color = Color.red;
@@ -82,6 +85,7 @@ namespace VTree.VOverlayN.ObjectsN.ObjectN.ComponentsN {
 		void UpdateCollider() {
 			collider.sharedMaterial = VO.main.script.physicsMaterials[0];
 			collider.points = vertexes.ToArray();
+			//collider.size = new Vector2(3, 1);
 		}
 
 		bool fontRefreshed;
@@ -92,7 +96,7 @@ namespace VTree.VOverlayN.ObjectsN.ObjectN.ComponentsN {
 				/*textMesh.font = Font.CreateDynamicFontFromOSFont("Cambria", textMesh.fontSize);
 				textMesh.font.RequestCharactersInTexture("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890", textMesh.fontSize, textMesh.fontStyle);*/
 				//textMesh.font = VO.main.script.font;
-				textMesh.GetComponent<MeshRenderer>().sharedMaterial = VO.main.script.fontMaterial;
+				textMesh.GetComponent<MeshRenderer>().sharedMaterial = VO.main.script.mainFont.material;
 
 				//textMesh.font = V.Clone(VO.main.script.font);
 				//textMesh.FixFontAtlas();
@@ -120,6 +124,12 @@ namespace VTree.VOverlayN.ObjectsN.ObjectN.ComponentsN {
 				rigidbody.drag = 2f;
 			else
 				rigidbody.drag = 0f;
+
+			if (IsTouchingGround() && number > 2) {
+				obj.Remove();
+				(obj.map.match as TowerMatch).fallenAndRemovedBlocks++;
+			}
 		}
+		public bool IsTouchingGround() { return obj.gameObject.GetBounds().ToBounds().min.y < .3; }
 	}
 }

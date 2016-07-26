@@ -358,3 +358,42 @@ public class VUI : MonoBehaviour
 	public void RefreshTexture(VTexture texture) { textures.Add(texture); }
 	public void RemoveTexture(VTexture texture) { textures.Remove(texture); }*#/
 }*/
+
+public class VTextDrawer {
+	public static GameObject canvasObjOverride;
+	public VTextDrawer(bool useL2Camera = false) {
+		obj = new GameObject("VTexture");
+		obj.transform.parent = canvasObjOverride ? canvasObjOverride.transform
+			: VO.main.gameObject.GetChild(useL2Camera ? "@General/UI/Canvas_L2" : "@General/UI/Canvas_L1").transform;
+		obj.SetActive(false);
+		obj.SetLayer("UI");
+
+		transform = obj.AddComponent<RectTransform>();
+		transform.localPosition = Vector3.zero;
+		transform.localRotation = Quaternion.identity;
+		transform.localScale = Vector3.one;
+
+		transform.pivot = Vector2.zero;
+		transform.anchorMin = transform.anchorMax = Vector2.zero;
+		transform.anchoredPosition = Vector2.zero;
+		transform.sizeDelta = Vector2.zero;
+
+		obj.AddComponent<CanvasRenderer>();
+		textComp = obj.AddComponent<Text>();
+	}
+
+	public GameObject obj;
+	public RectTransform transform;
+	public Text textComp;
+
+	public bool enabled {
+		get { return obj.activeSelf; }
+		set { obj.SetActive(value); }
+	}
+
+	public void Destroy() { V.Destroy(obj); }
+	public void DestroyIn(double seconds) { V.WaitXSecondsThenCall((float)seconds, Destroy); }
+
+	// can be used to set to index-0, making it display earlier than other VUI elements (thus making the other ones show up on top)
+	public void SetIndex(int index) { transform.SetSiblingIndex(index); }
+}

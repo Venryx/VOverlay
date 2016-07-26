@@ -9,6 +9,7 @@ using UnityEngine.UI;
 using VDFN;
 using VTree.OverlayN;
 using VTree.VOverlayN;
+using VTree.VOverlayN.MapsN.MapN;
 using VTree_Structures;
 using Object = UnityEngine.Object;
 
@@ -130,6 +131,12 @@ namespace VTree {
 		// subtrees
 		// ==========
 
+		// probably make-so: chat-member data is preserved between launches
+		[P(false)] public List<ChatMember> chatMembers = new List<ChatMember>();
+		public ChatMember GetChatMember(string name) {
+			return chatMembers.FirstOrDefault(a=>a.name == name) ?? chatMembers.VAdd(new ChatMember(name, VColor.Blue));
+		}
+
 		[VDFProp(popOutL2: true)] public Maps maps;
 		[VDFProp(popOutL2: true)] public Objects objects;
 		[VDFProp(popOutL2: true)] public Race race;
@@ -138,8 +145,7 @@ namespace VTree {
 		// unity-linked properties
 		// ==========
 
-		[P(false)]
-		public List<GameObject> rootObjects;
+		[P(false)] public List<GameObject> rootObjects;
 		[P(false)] public GameObject gameObject;
 		[P(false)] public VOverlayScript script;
 		[P(false)] public Transform transformHelper;
@@ -154,6 +160,9 @@ namespace VTree {
 		public bool _initialFileSystemDataLoadDone;
 		public bool _launched;
 		public void Launch() {
+			if (!Application.isEditor)
+				RenderSettings.skybox = null;
+
 			_launched = true;
 
 			// this is the only page atm, so always start it out visible

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using UnityEditor;
 using UnityEngine;
 using VDFN;
 using VectorStructExtensions;
@@ -80,7 +79,8 @@ namespace VTree.BiomeDefenseN.MatchesN {
 			if (!EmojiAdder.GetUVRectForEmojiChar(emoji).HasValue)
 				return;
 
-			var member = new ChatMember(username, VColor.Blue, emoji);
+			var member = VO.main.GetChatMember(username);
+			member.emojiStr = emoji;
 			var player = new Player(member);
 			map.a(a=>a.players).add = player;
 

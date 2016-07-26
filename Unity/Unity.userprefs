@@ -1,0 +1,13 @@
+﻿<Properties StartupItem="Unity.CSharp.Plugins.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\VOverlay\Race\RaceMatch.cs">
+    <Files>
+      <File FileName="Assets\VOverlay\Race\RaceMatch.cs" Line="5" Column="1" />
+      <File FileName="Assets\VOverlay\Objects\VObject.cs" Line="9" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

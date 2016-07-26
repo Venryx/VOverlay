@@ -13,6 +13,7 @@ using VTree.BiomeDefenseN.MatchesN;
 using VTree.BiomeDefenseN.ObjectsN;
 using VTree.VOverlayN.MapsN.MapN;
 using VTree.VOverlayN.SharedN;
+using VTree.VOverlayN.TowerN;
 using VTree_Structures;
 using Object = UnityEngine.Object;
 
@@ -131,6 +132,13 @@ namespace VTree.VOverlayN.MapsN {
 		}
 
 		[VDFProp(popOutL2: true)] public List<Player> players = new List<Player>();
+		void players_PreRemove(Player player) {
+			if (match is TowerMatch)
+				if (players.Count > 1)
+					(match as TowerMatch).currentPlayer = players[players.Count > player.attachPoint.list_index + 1 ? player.attachPoint.list_index + 1 : 0];
+				else
+					(match as TowerMatch).currentPlayer = null;
+		}
 
 		[VDFProp(popOutL2: true)] public List<VObject> plants = new List<VObject>();
 		[IgnoreStartData] void plants_PostAdd(VObject plant, Change change) {

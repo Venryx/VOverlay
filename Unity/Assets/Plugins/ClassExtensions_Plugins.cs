@@ -7,6 +7,14 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 
 public static class ClassExtensions_Plugins {
+	// object
+	public static VNullClass SetMeta(this object obj, object metaKey, VNullClass metaValue, bool useStrongStorage = true) { return VMeta.main.SetMeta(obj, metaKey, metaValue, useStrongStorage); } // for null
+	public static T SetMeta<T>(this object obj, object metaKey, T metaValue, bool useStrongStorage = true) { return VMeta.main.SetMeta(obj, metaKey, metaValue, useStrongStorage); }
+	public static T GetMeta<T>(this object obj, object metaKey) { return VMeta.main.GetMeta<T>(obj, metaKey); }
+	public static object GetMeta(this object obj, object metaKey) { return VMeta.main.GetMeta(obj, metaKey); }
+	public static T GetMeta<T>(this object obj, object metaKey, T returnValueIfMissing, bool useStrongStorage = true) { return VMeta.main.GetMeta(obj, metaKey, returnValueIfMissing, useStrongStorage); }
+	public static void ClearMeta(this object obj, bool useStrongStorage = true) { VMeta.main.ClearMeta(obj, useStrongStorage); }
+
 	// Stream
 	public static void CopyTo(this Stream source, Stream destination, int bufferSize = 4096) {
 		var buffer = new byte[bufferSize];

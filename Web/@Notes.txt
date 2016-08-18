@@ -1,0 +1,21 @@
+Packages
+==========
+node_modules:
+* Folder for node modules that are not modified at all.
+* This folder is as it should be simply by running "npm install" from "Main" folder.
+
+node_modules_CustomExternal:
+* Folder for node modules that are modified, and large/substantial enough to warrant their own folder/repo somewhere else on disk.
+* These other folders/repos should be symlinked to from this folder.
+
+node_modules_CustomInternal:
+* Folder for node modules that are small enough to not have a separate folder/repo (but maybe have one in the future).
+* Should be up-to-date just as part of BD repo. (this is preferred over Packages folder, which is like the "earliest state" for custom packages)
+* Can make-your-own.
+
+Packages:
+* Folder for modules/packages that are small enough to not have a seprate folder/repo (and probably won't have one in the future, since probably specific to project).
+* Should be up-to-date just as part of BD repo.
+* Can make-your-own.
+
+In other words) If making new package, and it's starting small: put in Packages first. Then move to node_modules_CustomInternal once progressed to use the node-modules approach. Then move to separate folder (symlinked from node_modules_CustomExternal) once gets large/substantial enough. Then move to just using npm when to the public level (i.e. accessible on npm).

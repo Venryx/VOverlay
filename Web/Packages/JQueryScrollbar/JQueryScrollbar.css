@@ -1,0 +1,531 @@
+/*************** SCROLLBAR BASE CSS ***************/
+ 
+/*.scroll-wrapper {
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: relative;
+}
+ 
+.scroll-wrapper > .scroll-content {
+    border: none !important;
+    box-sizing: content-box !important;
+    height: auto;
+    left: 0;
+    margin: 0;
+    max-height: none !important;
+    max-width: none !important;
+    overflow: scroll !important;
+    padding: 0;
+    position: relative !important;
+    top: 0;
+    width: auto !important;
+}
+ 
+.scroll-wrapper > .scroll-content::-webkit-scrollbar {
+    height: 0;
+    width: 0;
+}
+ 
+.scroll-element {
+    display: none;
+}
+.scroll-element, .scroll-element div {
+    box-sizing: content-box;
+}
+ 
+.scroll-element.scroll-x.scroll-scrollx_visible,
+.scroll-element.scroll-y.scroll-scrolly_visible {
+    display: block;
+}
+ 
+.scroll-element .scroll-bar,
+.scroll-element .scroll-arrow {
+    cursor: default;
+}
+ 
+.scroll-textarea {
+    border: 1px solid #cccccc;
+    border-top-color: #999999;
+}
+.scroll-textarea > .scroll-content {
+    overflow: hidden !important;
+}
+.scroll-textarea > .scroll-content > textarea {
+    border: none !important;
+    box-sizing: border-box;
+    height: 100% !important;
+    margin: 0;
+    max-height: none !important;
+    max-width: none !important;
+    overflow: scroll !important;
+    outline: none;
+    padding: 2px;
+    position: relative !important;
+    top: 0;
+    width: 100% !important;
+}
+.scroll-textarea > .scroll-content > textarea::-webkit-scrollbar {
+    height: 0;
+    width: 0;
+}
+ 
+ 
+ 
+ 
+.scrollbar-chrome.theme-blue > .scroll-element,
+.scrollbar-chrome.theme-blue > .scroll-element .scroll-bar,
+.scrollbar-chrome.theme-blue > .scroll-element .scroll-element_corner,
+.scrollbar-chrome.theme-blue > .scroll-element .scroll-element_track
+{ background-color: #66CCEE; }
+ 
+.scrollbar-chrome.theme-woods > .scroll-element,
+.scrollbar-chrome.theme-woods > .scroll-element .scroll-bar,
+.scrollbar-chrome.theme-woods > .scroll-element .scroll-element_corner,
+.scrollbar-chrome.theme-woods > .scroll-element .scroll-element_track
+{ background-color: #5F7C7F; }
+ 
+.scrollbar-chrome.theme-paint4 > .scroll-element,
+.scrollbar-chrome.theme-paint4 > .scroll-element .scroll-bar,
+.scrollbar-chrome.theme-paint4 > .scroll-element .scroll-element_corner,
+.scrollbar-chrome.theme-paint4 > .scroll-element .scroll-element_track
+{ background-color: #5566AA; }
+ 
+.scrollbar-chrome.theme-palace3 > .scroll-element,
+.scrollbar-chrome.theme-palace3 > .scroll-element .scroll-bar,
+.scrollbar-chrome.theme-palace3 > .scroll-element .scroll-element_corner,
+.scrollbar-chrome.theme-palace3 > .scroll-element .scroll-element_track
+{ background-color: #028B54; }
+ 
+.scrollbar-chrome.theme-dark > .scroll-element,
+.scrollbar-chrome.theme-dark > .scroll-element .scroll-bar,
+.scrollbar-chrome.theme-dark > .scroll-element .scroll-element_corner,
+.scrollbar-chrome.theme-dark > .scroll-element .scroll-element_track
+{ background-color: #999999; }
+ 
+.scrollbar-chrome.theme-sprites > .scroll-element,
+.scrollbar-chrome.theme-sprites > .scroll-element .scroll-bar,
+.scrollbar-chrome.theme-sprites > .scroll-element .scroll-element_corner,
+.scrollbar-chrome.theme-sprites > .scroll-element .scroll-element_track
+{ background-color: #BBBBBB; }
+ 
+ 
+/******************* JANOS SCROLLBAR *******************#/
+ 
+.scrollbar-chrome > .scroll-element,
+.scrollbar-chrome > .scroll-element div
+{
+    border: none;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    z-index: 10;
+}
+ 
+.scrollbar-chrome > .scroll-element div {
+    background-color: transparent;
+    display: block;
+    height: 100%;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+ 
+.scrollbar-chrome > .scroll-element.scroll-x {
+    border-top: 1px solid #AAAAAA;
+    bottom: 0;
+    height: 16px;
+    left: 0;
+    min-width: 100%;
+    width: 100%;
+}
+ 
+.scrollbar-chrome > .scroll-element.scroll-y {
+    border-left: 1px solid #AAAAAA;
+    height: 100%;
+    min-height: 100%;
+    right: 0;
+    top: 0;
+    width: 16px;
+}
+ 
+.scrollbar-chrome > .scroll-element .scroll-element_corner {
+    display: none;
+}
+ 
+.scrollbar-chrome > .scroll-element.scroll-x,
+.scrollbar-chrome > .scroll-element.scroll-x .scroll-bar {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAPCAYAAADd/14OAAAAS0lEQVR42qzQywkAIAxEQQPpvwn7E/EDESXREt7BHPY0sEvE3XMCpyJiwIW+mBR2Civa+BVGhOuLQt/TaHWncFBoFC4KN4WHwCvAAHI/GzHvcCTCAAAAAElFTkSuQmCC);
+    background-repeat: repeat-x;
+}
+.scrollbar-chrome > .scroll-element.scroll-x .scroll-bar {
+    box-shadow: 0 1px 2px, 0 -1px 1px rgba(255, 255, 255, 0.8);
+}
+.scrollbar-chrome > .scroll-element.scroll-y,
+.scrollbar-chrome > .scroll-element.scroll-y .scroll-bar {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAKCAYAAABrGwT5AAAAAXNSR0IArs4c6QAAAEtJREFUKM/ty00Kg0AAQ+Ev3v8W3k/8qWipzLiYFrqR7osPsknyUkrpk2xYsWDCWGsdMCaZ3/0DO5544eg08pVWJJ/tkp+HW/4L+QSzjxQbWJrRJQAAAABJRU5ErkJggg==);
+    background-repeat: repeat-y;
+}
+.scrollbar-chrome > .scroll-element.scroll-y .scroll-bar {
+    box-shadow: 0 1px 2px, 0 -1px 1px rgba(255, 255, 255, 0.8);
+}
+ 
+.scrollbar-chrome > .scroll-element.scroll-x .scroll-element_track {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAQCAYAAAAvf+5AAAAAXklEQVR42mJkYGBIZcAO/iPR/1iAxG8CisAYpPAnsQp/EGE1XoUoiklS+J0BPwArJmQiA7FWoyj8hUXiH7oArnBE9ghc4S9irf5NrMI/xFr9hwgTwQr/4TMJBgACDABrOConte5OAgAAAABJRU5ErkJggg==);
+    background-repeat: repeat-x;
+}
+.scrollbar-chrome > .scroll-element.scroll-y .scroll-element_track {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAKCAYAAAC9vt6cAAAAAXNSR0IArs4c6QAAAFNJREFUKM/FzksKgDAMBNDX3NT7X8BaC25clBKw4sKBgYTMJwUbGurAfWLFcbPhREcPBEpC05ztqXkUPyKS5LJqHj9YaU11sdgarw+LKF8D/B9wAWL/DzbaLOVxAAAAAElFTkSuQmCC);
+    background-repeat: repeat-y;
+}
+.scrollbar-chrome > .scroll-element.scroll-x .scroll-bar .scroll-bar_body {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAHCAYAAADAp4fuAAAAMklEQVR42mL4DwRnz579zwAEMDYTiLN7924GGACxmRiwAEoFV6xYwSAvLw/mwNgAAQYAEz0X3c1VmrwAAAAASUVORK5CYII=);
+}
+.scrollbar-chrome > .scroll-element.scroll-y .scroll-bar .scroll-bar_body {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAFCAYAAACJmvbYAAAAAXNSR0IArs4c6QAAAChJREFUCNdj/P///38GLGDFihUMLOfOnWPYvXs3hqS8vDwDXsBItrEA28oV4/a4edAAAAAASUVORK5CYII=);
+}
+.scrollbar-chrome > .scroll-element.scroll-x .scroll-arrow_less {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAj0lEQVR42mJgwA4EgVgbRP///58BhJmwKFIwNTW1AEpGANlSMEEWNFOkNm/ebObj42MHZLMDsSi6QpApmqdOnbICspWxuQWkUPTYsWOOlpaWMFOwAiYGIgFI4WsrK6v9ZmZmq4Dsu4RMfHD69OkTjIyMK7Zs2bIbyP9JjC0gj3kCg6cZFJawcGQgNsABAgwAc40zrttfic8AAAAASUVORK5CYII=);
+    box-shadow: 0 1px 2px, 0 -1px 1px rgba(255, 255, 255, 0.8);
+}
+.scrollbar-chrome > .scroll-element.scroll-x .scroll-arrow_more {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAh0lEQVR42mL4//8/AwgDgSAQa0NpDMCExJYCaogwNTW1ALIVMFQimegApJcB8fzNmzcnopvOhMUWdh8fH1d007EphAHlU6dOhR07dswRyBbFpxAFsOCRu2tmZnbs9OnT14Hs19gU/tyyZcshX1/fU0D2MyB+j+5rbSDdDPSAJ6HgwRvgAAEGAC2sRKFV1v+TAAAAAElFTkSuQmCC);
+}
+.scrollbar-chrome > .scroll-element.scroll-y .scroll-arrow_less {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAjklEQVR42mJgwASiUIwCGNH4CseOHXMEMaysrPYDqQdYDGIQNDU19fz///98EAaxQWLYTNQGKogA0spQ/l1GRsYVQPoqiMMEs3Lz5s1mSIpAQBkqpgAzEWSlxalTp8KAbHY05/w0MzNbdfr06ROMWKxEB2AnMEIdLIUtSKDgNRA/YwSaxkAMYGIgEgAEGADQpyzNaQf+BAAAAABJRU5ErkJggg==);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+}
+.scrollbar-chrome > .scroll-element.scroll-y .scroll-arrow_more {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAg0lEQVR42mL8//8/AzGAiYFIwAjEgkAsBcSiONS8BuJnLCBFQOsjgLQyDoV3GRkZV4CsfmZmZnYMSP/EougnVO4ZSOH706dPX9+yZcshdFUgMZAcSA0jkrg2mhPAVgLpq+i+RnYC3EpkXyMDhWPHjjmCGFZWVvuB1AN8QSaKLagAAgwAkYkwicybOCoAAAAASUVORK5CYII=);
+}
+ 
+.scrollbar-chrome > .scroll-element .scroll-arrow,
+.scrollbar-chrome > .scroll-element .scroll-bar_body {
+    background-position: center;
+    background-repeat: no-repeat;
+}
+ 
+.scrollbar-chrome > .scroll-content.scroll-scrolly_visible { left: -17px; margin-left: 17px; }
+.scrollbar-chrome > .scroll-content.scroll-scrollx_visible { top:  -17px; margin-top:  17px; }
+ 
+/* scrollbar arrows *#/
+ 
+.scrollbar-chrome > .scroll-element .scroll-arrow { display: none; }
+.scrollbar-chrome > .scroll-element.scroll-element_arrows_visible .scroll-arrow { display: block; z-index: 12; }
+ 
+.scrollbar-chrome > .scroll-element.scroll-x.scroll-element_arrows_visible .scroll-arrow_less { height: 100%; width: 16px;}
+.scrollbar-chrome > .scroll-element.scroll-x.scroll-element_arrows_visible .scroll-arrow_more { height: 100%; left: auto; right: 0; width: 16px;}
+ 
+.scrollbar-chrome > .scroll-element.scroll-x.scroll-element_arrows_visible .scroll-element_outer { left: 16px; }
+.scrollbar-chrome > .scroll-element.scroll-x.scroll-element_arrows_visible .scroll-element_track { left: -32px; }
+.scrollbar-chrome > .scroll-element.scroll-x.scroll-element_arrows_visible .scroll-element_size { left: -33px; }
+ 
+.scrollbar-chrome > .scroll-element.scroll-y.scroll-element_arrows_visible .scroll-arrow_less { width: 100%; height: 16px;}
+.scrollbar-chrome > .scroll-element.scroll-y.scroll-element_arrows_visible .scroll-arrow_more { width: 100%; top: auto; bottom: 0; height: 16px;}
+ 
+.scrollbar-chrome > .scroll-element.scroll-y.scroll-element_arrows_visible .scroll-element_outer { top: 16px; }
+.scrollbar-chrome > .scroll-element.scroll-y.scroll-element_arrows_visible .scroll-element_track { top: -32px; }
+.scrollbar-chrome > .scroll-element.scroll-y.scroll-element_arrows_visible .scroll-element_size { top: -33px; }
+ 
+/* if another scrollbar is visible *#/
+ 
+.scrollbar-chrome > .scroll-element.scroll-x.scroll-scrolly_visible .scroll-element_size { left: -17px; }
+.scrollbar-chrome > .scroll-element.scroll-y.scroll-scrollx_visible .scroll-element_size { top: -17px; }
+ 
+.scrollbar-chrome > .scroll-element.scroll-x.scroll-scrolly_visible .scroll-element_inner { left: -17px; }
+.scrollbar-chrome > .scroll-element.scroll-y.scroll-scrollx_visible .scroll-element_inner { top: -17px; }
+ 
+/* if arrows & another scrollbar are visible *#/
+ 
+.scrollbar-chrome > .scroll-element.scroll-y.scroll-scrollx_visible .scroll-element_corner,
+.scrollbar-chrome > .scroll-element.scroll-y.scroll-element_arrows_visible.scroll-scrollx_visible .scroll-element_corner {
+    border-top: 1px solid #AAAAAA;
+    bottom: 0;
+    display: block;
+    height: 16px;
+    left: auto;
+    right: 0;
+    top: auto;
+    width: 16px;
+    z-index: 13;
+}
+ 
+.scrollbar-chrome > .scroll-element.scroll-x.scroll-element_arrows_visible.scroll-scrolly_visible .scroll-arrow_more { right: 17px;}
+.scrollbar-chrome > .scroll-element.scroll-x.scroll-element_arrows_visible.scroll-scrolly_visible .scroll-element_track { left: -50px;}
+.scrollbar-chrome > .scroll-element.scroll-x.scroll-element_arrows_visible.scroll-scrolly_visible .scroll-element_size { left: -51px;}
+ 
+ 
+.scrollbar-chrome > .scroll-element.scroll-y.scroll-element_arrows_visible.scroll-scrollx_visible .scroll-arrow_more { bottom: 17px;}
+.scrollbar-chrome > .scroll-element.scroll-y.scroll-element_arrows_visible.scroll-scrollx_visible .scroll-element_track { top: -50px;}
+.scrollbar-chrome > .scroll-element.scroll-y.scroll-element_arrows_visible.scroll-scrollx_visible .scroll-element_size { top: -51px;}*/
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*************** SCROLLBAR BASE CSS ***************/
+ 
+.scroll-wrapper {
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: relative;
+}
+ 
+.scroll-wrapper > .scroll-content {
+    border: none !important;
+    box-sizing: content-box !important;
+    height: auto;
+    left: 0;
+    margin: 0;
+    max-height: none !important;
+    max-width: none !important;
+    overflow: scroll !important;
+    padding: 0;
+    position: relative !important;
+    top: 0;
+    width: auto !important;
+}
+ 
+.scroll-wrapper > .scroll-content::-webkit-scrollbar {
+    height: 0;
+    width: 0;
+}
+ 
+.scroll-element {
+    display: none;
+}
+.scroll-element, .scroll-element div {
+    box-sizing: content-box;
+}
+ 
+.scroll-element.scroll-x.scroll-scrollx_visible,
+.scroll-element.scroll-y.scroll-scrolly_visible {
+    display: block;
+}
+ 
+.scroll-element .scroll-bar,
+.scroll-element .scroll-arrow {
+    cursor: default;
+}
+ 
+.scroll-textarea {
+    border: 1px solid #cccccc;
+    border-top-color: #999999;
+}
+.scroll-textarea > .scroll-content {
+    overflow: hidden !important;
+}
+.scroll-textarea > .scroll-content > textarea {
+    border: none !important;
+    box-sizing: border-box;
+    height: 100% !important;
+    margin: 0;
+    max-height: none !important;
+    max-width: none !important;
+    overflow: scroll !important;
+    outline: none;
+    padding: 2px;
+    position: relative !important;
+    top: 0;
+    width: 100% !important;
+}
+.scroll-textarea > .scroll-content > textarea::-webkit-scrollbar {
+    height: 0;
+    width: 0;
+}
+
+/*************** SCROLLBAR GOOGLE CHROME ***************/
+
+.scrollbar-chrome > .scroll-element,
+.scrollbar-chrome > .scroll-element div
+{
+    border: none;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    z-index: 10;
+}
+
+.scrollbar-chrome > .scroll-element { background-color: #ffffff; }
+
+.scrollbar-chrome > .scroll-element div
+{
+    display: block;
+    height: 100%;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+
+.scrollbar-chrome > .scroll-element .scroll-element_outer
+{
+}
+
+.scrollbar-chrome > .scroll-element .scroll-element_track
+{
+    background: #f1f1f1;
+    border: 1px solid #dbdbdb;
+}
+
+.scrollbar-chrome > .scroll-element.scroll-x
+{
+    bottom: 0;
+    height: 16px;
+    left: 0;
+    min-width: 100%;
+    width: 100%;
+}
+
+.scrollbar-chrome > .scroll-element.scroll-y
+{
+    height: 100%;
+    min-height: 100%;
+    right: 0;
+    top: 0;
+    width: 16px;
+}
+
+.scrollbar-chrome > .scroll-element .scroll-bar
+{
+    background-color: #d9d9d9;
+    border: 1px solid #bdbdbd;
+    cursor: default;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.scrollbar-chrome > .scroll-element .scroll-bar:hover
+{
+    background-color: #c2c2c2;
+    border-color: #a9a9a9;
+}
+
+.scrollbar-chrome > .scroll-element.scroll-draggable .scroll-bar
+{
+    background-color: #919191;
+    border-color: #7e7e7e;
+}
+ 
+/* scrollbar height/width & offset from container borders */
+ 
+.scrollbar-chrome > .scroll-content.scroll-scrolly_visible { left: -16px; margin-left: 16px; }
+.scrollbar-chrome > .scroll-content.scroll-scrollx_visible { top:  -16px; margin-top:  16px; }
+ 
+.scrollbar-chrome > .scroll-element.scroll-x .scroll-bar { height: 8px; min-width: 10px; top: 3px; }
+.scrollbar-chrome > .scroll-element.scroll-y .scroll-bar { left: 3px; min-height: 10px; width: 8px; }
+ 
+.scrollbar-chrome > .scroll-element.scroll-x .scroll-element_outer { border-left: 1px solid #dbdbdb; }
+.scrollbar-chrome > .scroll-element.scroll-x .scroll-element_track { height: 14px; left: -3px; }
+.scrollbar-chrome > .scroll-element.scroll-x .scroll-element_size { height: 14px; left: -4px; }
+ 
+.scrollbar-chrome > .scroll-element.scroll-y .scroll-element_outer { border-top: 1px solid #dbdbdb; }
+.scrollbar-chrome > .scroll-element.scroll-y .scroll-element_track { top: -3px; width: 14px; }
+.scrollbar-chrome > .scroll-element.scroll-y .scroll-element_size { top: -4px; width: 14px; }
+ 
+/* update scrollbar offset if both scrolls are visible */
+ 
+.scrollbar-chrome > .scroll-element.scroll-x.scroll-scrolly_visible .scroll-element_size { left: -19px; }
+.scrollbar-chrome > .scroll-element.scroll-y.scroll-scrollx_visible .scroll-element_size { top: -19px; }
+ 
+.scrollbar-chrome > .scroll-element.scroll-x.scroll-scrolly_visible .scroll-element_track { left: -19px; }
+.scrollbar-chrome > .scroll-element.scroll-y.scroll-scrollx_visible .scroll-element_track { top: -19px; }
+
+
+
+
+/*************** CUSTOM OVERRIDE ***************/
+
+.scrollbar-chrome > .scroll-content.scroll-scrollx_visible
+{
+    top: -10;
+    margin-top: 10;
+}
+.scrollbar-chrome > .scroll-content.scroll-scrolly_visible
+{
+    left: -10;
+    margin-left: 10;
+}
+
+.scrollbar-chrome > .scroll-element { background-color: transparent; }
+
+.scrollbar-chrome > .scroll-element.scroll-x
+{
+    bottom: 0;
+    height: 10;
+    left: 0;
+    min-width: 100%;
+    width: 100%;
+}
+.scrollbar-chrome > .scroll-element.scroll-y
+{
+    height: 100%;
+    min-height: 100%;
+    right: 0;
+    top: 0;
+    width: 10;
+}
+
+.scrollbar-chrome > .scroll-element .scroll-element_track
+{
+    background-color: rgba(0, 0, 0, .3);
+    border: none;
+    border-radius: 5;
+}
+
+.scrollbar-chrome > .scroll-element .scroll-bar
+{
+    border: none !important;
+    border-radius: 5 !important;
+    background-color: rgba(255, 255, 255, .3);
+}
+.scrollbar-chrome > .scroll-element.scroll-draggable .scroll-bar, .scrollbar-chrome > .scroll-element .scroll-bar:hover
+{
+    background-color: rgba(255, 255, 255, .7);
+}
+
+ .scrollbar-chrome > .scroll-element.scroll-x .scroll-bar { height: 10; min-width: 10; top: 0; }
+.scrollbar-chrome > .scroll-element.scroll-y .scroll-bar { left: 0; min-height: 10; width: 10; }
+
+.scrollbar-chrome > .scroll-element.scroll-x .scroll-element_outer { border-left: none; }
+.scrollbar-chrome > .scroll-element.scroll-x .scroll-element_track { height: 10; left: 0; }
+.scrollbar-chrome > .scroll-element.scroll-x .scroll-element_size { height: 10; left: 0; }
+
+.scrollbar-chrome > .scroll-element.scroll-y .scroll-element_outer { border-top: none; }
+.scrollbar-chrome > .scroll-element.scroll-y .scroll-element_track { top: 0; width: 10; }
+.scrollbar-chrome > .scroll-element.scroll-y .scroll-element_size { top: 0; width: 10; }
+
+.scrollbar-chrome > .scroll-element.scroll-x.scroll-scrolly_visible .scroll-element_size { left: -10; }
+.scrollbar-chrome > .scroll-element.scroll-y.scroll-scrollx_visible .scroll-element_size { top: -10; }
+ 
+.scrollbar-chrome > .scroll-element.scroll-x.scroll-scrolly_visible .scroll-element_track { left: -10; }
+.scrollbar-chrome > .scroll-element.scroll-y.scroll-scrollx_visible .scroll-element_track { top: -10; }

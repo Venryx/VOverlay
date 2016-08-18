@@ -1,0 +1,32 @@
+.contextMenu, .contextMenu .ui-menu
+{
+    z-index: 1;
+    padding: 1;
+    padding-top: 0;
+    border: 1px outset #555;
+    /*border-radius: 5px;*/
+}
+.contextMenu .ui-menu
+{
+    margin-top: 1;
+}
+.contextMenu .ui-menu-item
+{
+    padding: 2 10 2 3;
+    /*transform: translate(0, 1px);*/
+}
+.contextMenu .ui-menu-item a
+{
+    font-size: 11;
+    margin: 0 !important;
+    padding: 0 5;
+    border: none !important;
+}
+.contextMenu .ui-menu-item a.ui-state-active { background: #EEE; }
+
+.contextMenu .ui-menu-divider
+{
+    margin: 2px -2px 0;
+    border: 2px solid #AAA;
+    border-width: 1px 0 0;
+}

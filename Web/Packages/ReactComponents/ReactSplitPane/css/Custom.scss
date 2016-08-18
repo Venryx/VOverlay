@@ -1,0 +1,51 @@
+/**, *:before, *:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    position: relative;
+}*/
+
+.fill-height { height: 100%; }
+
+.root {
+    height: 100vh;
+    width: 100vw;
+}
+
+.Splitter {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    background: #000;
+    z-index: 2;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding;
+    background-clip: padding-box;
+	background: url(/Main/Packages/Images/Tiling/Menu/Menu_B80.png) !important;
+}
+
+/*.Splitter:hover {
+    -webkit-transition: all 2s ease;
+    transition: all 2s ease;
+}*/
+
+.Pane.horizontal { height: 100%; }
+.Splitter.horizontal {
+    height: 4px;
+    margin-top: -4px;
+    cursor: row-resize;
+	position: absolute;
+    width: 100%;
+}
+/*.Splitter.horizontal:hover {
+}*/
+
+.Splitter.vertical {
+    width: 4;
+    margin-left: -4px;
+    cursor: col-resize;
+	position: absolute;
+	height: 100%;
+}
+/*.Splitter.vertical:hover {
+}*/

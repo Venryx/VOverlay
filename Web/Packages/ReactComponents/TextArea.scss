@@ -1,0 +1,22 @@
+﻿.TextArea {
+    margin: 0;
+    /*border: 1px solid #A9A9A9;*/
+    padding: 3 5;
+    border: none;
+    background: url(/Packages/Images/Tiling/Menu/Menu.png);
+    color: #888;
+    cursor: text;
+
+    display: inline-block;
+    box-sizing: border-box;
+    white-space: pre;
+    word-wrap: normal;
+    min-width: 100%;
+    min-height: 100%;
+    /*overflow: auto;*/
+}
+.TextArea[disabled] {
+    /*background: white;*/
+    opacity: .7;
+    cursor: default;
+}

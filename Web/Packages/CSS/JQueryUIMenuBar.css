@@ -1,0 +1,43 @@
+.ui-menubar
+{
+    list-style: none outside none;
+    margin: 0;
+    padding-left: 0;
+}
+.ui-menubar .ui-button
+{
+    background: transparent !important;
+    float: left;
+    font-weight: normal;
+    margin: 0 !important;
+    padding: 1 5 !important;
+    border-radius: 0;
+    outline: medium none;
+}
+.ui-menubar .ui-menubar-link
+{
+    border-left: 1px solid rgba(0, 0, 0, 0);
+    border-right: 1px solid rgba(0, 0, 0, 0);
+}
+.ui-menubar .ui-menu
+{
+    font-weight: normal;
+    position: absolute;
+    width: 200px;
+    z-index: 9999;
+    padding: 0;
+}
+.ui-menubar .ui-menu-item a { color: #000; border-radius: 0; }
+
+.ui-menubar-item { float: left; }
+.ui-menubar-item.ui-state-active { background: #555; }
+.ui-menubar-item ul { border: 1px outset #AAA; }
+.ui-menubar-item .ui-button-icon-secondary { display: none !important; }
+.ui-menubar-item a
+{
+    font-size: 11;
+    margin: 0 !important;
+    padding: 0;
+    border: none !important;
+}
+.ui-menubar-item .ui-menu { border-radius: 0; }

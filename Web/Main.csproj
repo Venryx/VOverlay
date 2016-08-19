@@ -58,6 +58,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="VOverlay.jsx" />
+    <Content Include="VOverlay\RightBar.jsx" />
     <Content Include="VOverlay\TopBar.jsx" />
     <Content Include="VOverlay\BottomBar.jsx" />
     <Content Include="VOverlay_Old.jsx" />

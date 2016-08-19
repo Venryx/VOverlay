@@ -206,10 +206,17 @@ V = new function() {
 	};
 
 	//self.GetScreenCenter = function() { return Frame.screenCenter.offset(); };
-	/*s.GetScreenWidth = function() { return $("body").width(); }
-	s.GetScreenHeight = function() { return $("body").height(); }*/
-	s.GetScreenWidth = function() { return VO.root.width(); };
-	s.GetScreenHeight = function() { return VO.root.height(); };
+	s.GetScreenWidth = function() { return $("body").width(); }
+	s.GetScreenHeight = function() { return $("body").height(); }
+	/*s.GetScreenWidth = function() { return VO.root.width(); };
+	s.GetScreenHeight = function() { return VO.root.height(); };*/
+	/*s.GetScreenRect = function(control) {
+		var left = viewport.offset().left / V.GetScreenWidth();
+		var top = viewport.offset().top / V.GetScreenHeight();
+		var width = viewport.width() / V.GetScreenWidth();
+		var height = viewport.height() / V.GetScreenHeight();
+		return {x: left, y: (V.GetScreenHeight() - 1) - top, width: width, height: height};
+	};*/
 
 	s.GetContentSize = function(content) {
 		/*var holder = $("#hiddenTempHolder");
@@ -339,15 +346,6 @@ V = new function() {
 	s.AsArray = function(args) { return s.Slice(args, 0); };
 	//s.ToArray = function(args) { return s.Slice(args, 0); };
 	s.Slice = function(args, start, end) { return Array.prototype.slice.call(args, start != null ? start : 0, end); };
-
-	/*s.GetScreenRect = function(control)
-	{
-		var left = viewport.offset().left / V.GetScreenWidth();
-		var top = viewport.offset().top / V.GetScreenHeight();
-		var width = viewport.width() / V.GetScreenWidth();
-		var height = viewport.height() / V.GetScreenHeight();
-		return {x: left, y: (V.GetScreenHeight() - 1) - top, width: width, height: height};
-	};*/
 
 	s.GetElementDescendants = function(element, /*o:*/ includeSelf) {
 		var result = [];

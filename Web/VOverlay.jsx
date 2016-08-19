@@ -4,6 +4,7 @@ var ReactDOM = require("react-dom");
 require("Packages/CSS/Globals.scss");
 
 var TopBar = require("VOverlay/TopBar");
+var RightBar = require("VOverlay/RightBar");
 var BottomBar = require("VOverlay/BottomBar");
 
 var urlVars = GetURLVars();
@@ -34,6 +35,7 @@ class VOverlay extends BaseComponent {
 				backgroundImage: urlVars.background ? "url(/Packages/Images/Tiling/Menu/Menu_B130.png)" : ""
 			}}>
 				<TopBar styles={styles}/>
+				<RightBar styles={styles}/>
 				<BottomBar styles={styles}/>
 			</div>
 		);
@@ -56,5 +58,11 @@ class VOverlay extends BaseComponent {
 //export default VOverlay;
 
 $(()=> {
-	ReactDOM.render(<VOverlay/>, $("#VOverlayRoot")[0]);
+	//ReactDOM.render(<VOverlay/>, $("#VOverlayRoot")[0]);
+
+	// maybe temp
+    var VO = g.VO = {};
+    VO.root = $("#VOverlayRoot");
+    VO.rootComponent = <VOverlay/>;
+	ReactDOM.render(VO.rootComponent, VO.root[0]);
 });

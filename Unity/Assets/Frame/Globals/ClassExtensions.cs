@@ -293,7 +293,7 @@ public static class ClassExtensions {
 		return result;
 	}
 
-	// Dictionary<TKey, TValue>
+	// IDictionary<TKey, TValue>
 	//public static TValue GetValueOrNull<TKey, TValue>(this IDictionary<TKey, TValue> self, TKey key) where TValue : class { return GetValueOrDefault(self, key, null); } // maybe temp
 	public static TValue GetValueOrX<TKey, TValue>(this IDictionary<TKey, TValue> self, TKey key, TValue defaultValueX = default(TValue)) {
 		TValue val;

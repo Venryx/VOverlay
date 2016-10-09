@@ -25,7 +25,7 @@ class BottomBar extends BaseComponent {
 				<div style={this.props.styles.glowingTextDivStyle.Extended({whiteSpace: "pre"})}>
 				{firstDot}{bold("Schedule:")} weeknights + sat, 12am-5am pst (7-12 utc){
 					dot}{bold("Discord server (voice, updates):")} discord.gg/xxJDCV9{
-					dot}{bold("Task list:")} trello.com/b/mZLl6Dur
+					dot}{bold("Task list:")} trello.com/b/qLhVk9M1
 				</div>
 				<div style={this.props.styles.glowingTextDivStyle.Extended({marginTop: -2, whiteSpace: "pre"})}>
 				{firstDot}YouTube/BiomeDefense{dot}Facebook/BiomeDefense{dot}Twitter/BiomeDefense{dot}Google/+BiomeDefense{dot}IndieDB/Games/Biome-Defense

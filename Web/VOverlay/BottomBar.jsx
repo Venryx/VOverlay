@@ -23,8 +23,10 @@ class BottomBar extends BaseComponent {
 			    border: "solid rgba(30,30,70,1)", borderWidth: "1px 0 0 0", //borderRadius: "20px 20px 0 0",
 				boxShadow: "rgba(30,30,70,1) 0px 0px 10px, rgba(0,0,10,.5) 0px 0px 30px 10px"}}>
 				<div style={this.props.styles.glowingTextDivStyle.Extended({whiteSpace: "pre"})}>
-				{firstDot}{bold("Schedule:")} weeknights + sat, 12am-5am pst (7-12 utc){
-					dot}{bold("Discord server (voice, updates):")} discord.gg/xxJDCV9{
+				{firstDot}{bold("Schedule:")}
+					{/*" weeknights + sat, 12am-5am pst (7-12 utc)"*/}
+					{" all but monday, 3-7am+ pst (10-14+ utc)"}
+				{dot}{bold("Discord server (voice, updates):")} discord.gg/xxJDCV9{
 					dot}{bold("Task list:")} trello.com/b/qLhVk9M1
 				</div>
 				<div style={this.props.styles.glowingTextDivStyle.Extended({marginTop: -2, whiteSpace: "pre"})}>

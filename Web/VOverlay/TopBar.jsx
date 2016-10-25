@@ -17,7 +17,9 @@ class TopBar extends BaseComponent {
 		}
 
 		return (
-			<div style={{position: "absolute", top: 0, width: "100%", height: 64}}>
+			//<div style={{position: "absolute", top: 0, width: "100%", height: 64}}>
+			//<div style={{position: "absolute", bottom: 60, width: "100%", height: 64}}>
+			<div style={{position: "absolute", top: 0, right: 0, width: 415, height: 64}}>
 				{/*<div style={{display: "block", width: 290, height: 30, margin: "20px auto 0px", borderRadius: "30px",
 					backgroundColor: "rgba(0,0,10,.3)", boxShadow: "rgba(0,0,10,.3) 0px 0px 10px 5px"}}>
 					<div style={this.props.styles.glowingTextDivStyle.Extended({fontSize: 32, textAlign: "center", transform: "translateY(-10px)"})}>

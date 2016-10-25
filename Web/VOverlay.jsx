@@ -34,7 +34,7 @@ class VOverlay extends BaseComponent {
 				//backgroundImage: "url(/Packages/Images/Backgrounds/Hawaii_1920x1080.jpg)"
 				backgroundImage: urlVars.background ? "url(/Packages/Images/Tiling/Menu/Menu_B130.png)" : ""
 			}}>
-				<TopBar styles={styles}/>
+				{/*<TopBar styles={styles}/>*/}
 				<RightBar styles={styles}/>
 				<BottomBar styles={styles}/>
 			</div>

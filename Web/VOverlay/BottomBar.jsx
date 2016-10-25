@@ -25,7 +25,8 @@ class BottomBar extends BaseComponent {
 				<div style={this.props.styles.glowingTextDivStyle.Extended({whiteSpace: "pre"})}>
 				{firstDot}{bold("Schedule:")}
 					{/*" weeknights + sat, 12am-5am pst (7-12 utc)"*/}
-					{" all but monday, 3-7am+ pst (10-14+ utc)"}
+					{/*" all but monday, 3-7am+ pst (10-14+ utc)"*/}
+					{" generally start ~midnight pst (7 utc)"}
 				{dot}{bold("Discord server (voice, updates):")} discord.gg/xxJDCV9{
 					dot}{bold("Task list:")} trello.com/b/qLhVk9M1
 				</div>
